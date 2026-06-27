@@ -73,16 +73,54 @@ public class SettingsActivity extends BaseActivity {
             prefs.edit().putBoolean("biometric_enabled", !current).apply();
             Toast.makeText(this, !current ? "Biométrie activée" : "Biométrie désactivée", Toast.LENGTH_SHORT).show();
         });
-        setNavigationItem(R.id.menu_devices, R.drawable.ic_location, "Appareils connectés", v ->
-                Toast.makeText(this, "Cet appareil est le seul connecté", Toast.LENGTH_SHORT).show());
-        setNavigationItem(R.id.menu_notifications, R.drawable.ic_bell, "Notifications", v ->
-                Toast.makeText(this, "Paramètres de notification", Toast.LENGTH_SHORT).show());
+        setNavigationItem(R.id.menu_devices, R.drawable.ic_location, "Appareils connectés", v -> {
+            String[][] devices = {
+                    {"Pixel 7 Pro", "En ligne · Paris, France", "ic_phone"},
+                    {"Liqid Web", "Navigateur Chrome · Windows", "ic_laptop"},
+                    {"Session active", "Dernière activité : il y a 2 min", "ic_clock"}
+            };
+            String[] items = new String[devices.length];
+            for (int i = 0; i < devices.length; i++) {
+                items[i] = devices[i][0] + "\n" + devices[i][1];
+            }
+            new AlertDialog.Builder(this)
+                    .setTitle("Appareils connectés")
+                    .setItems(items, null)
+                    .setPositiveButton("Fermer", null)
+                    .show();
+        });
+        setNavigationItem(R.id.menu_notifications, R.drawable.ic_bell, "Notifications", v -> {
+            String[] options = {
+                    "Transactions" + (prefs.getBoolean("notif_transactions", true) ? " ✓" : ""),
+                    "Promotions" + (prefs.getBoolean("notif_promotions", false) ? " ✓" : ""),
+                    "Sécurité" + (prefs.getBoolean("notif_security", true) ? " ✓" : "")
+            };
+            new AlertDialog.Builder(this)
+                    .setTitle("Notifications")
+                    .setItems(options, (dialog, which) -> {
+                        String[] keys = {"notif_transactions", "notif_promotions", "notif_security"};
+                        boolean current = prefs.getBoolean(keys[which], which != 1);
+                        prefs.edit().putBoolean(keys[which], !current).apply();
+                        Toast.makeText(this, options[which].replace(" ✓", "").replace(" ✗", "") +
+                                " : " + (!current ? "Activé" : "Désactivé"), Toast.LENGTH_SHORT).show();
+                    })
+                    .setPositiveButton("Fermer", null)
+                    .show();
+        });
         setNavigationItem(R.id.menu_language, R.drawable.ic_flag, "Langue", v -> {
             String[] languages = {"Français", "English", "Español"};
+            String[] codes = {"fr", "en", "es"};
+            String current = prefs.getString("app_lang", "fr");
+            int checked = java.util.Arrays.asList(codes).indexOf(current);
             new AlertDialog.Builder(this)
                     .setTitle("Choisir la langue")
-                    .setItems(languages, (dialog, which) ->
-                            Toast.makeText(this, "Langue changée : " + languages[which], Toast.LENGTH_SHORT).show())
+                    .setSingleChoiceItems(languages, checked, (dialog, which) -> {
+                        prefs.edit().putString("app_lang", codes[which]).apply();
+                        Toast.makeText(this, "Langue : " + languages[which], Toast.LENGTH_SHORT).show();
+                        recreate();
+                        dialog.dismiss();
+                    })
+                    .setNegativeButton("Annuler", null)
                     .show();
         });
     }

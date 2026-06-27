@@ -136,5 +136,10 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
 
+        <!-- Visionneuse document -->
+        <activity android:name="com.iBiliuminc.liqid.ui.profile.DocumentViewActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
     </application>
 </manifest>
