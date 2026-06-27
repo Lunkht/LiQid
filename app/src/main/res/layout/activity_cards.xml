@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    ÉCRAN CARTES — Gestion des cartes bancaires
+    Viewpager cartes + panneau de contrôles (gel, limites, etc.)
+-->
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/liqid_bg_primary">
+
+    <!-- Toolbar -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/liqid_bg_primary"
+        app:elevation="0dp">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="@string/cards_title"
+            app:titleTextColor="?attr/liqid_text_primary"/>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="72dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:overScrollMode="never">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="32dp">
+
+            <!-- ── ViewPager cartes ───────────────────── -->
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewpager_cards"
+                android:layout_width="match_parent"
+                android:layout_height="210dp"
+                android:layout_marginTop="16dp"
+                android:paddingHorizontal="20dp"
+                android:clipToPadding="false"
+                android:overScrollMode="never"/>
+
+            <!-- Indicateurs points -->
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab_indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                app:tabGravity="center"
+                app:tabIndicatorHeight="0dp"
+                app:tabMinWidth="0dp"
+                app:tabPaddingStart="0dp"
+                app:tabPaddingEnd="0dp"/>
+
+            <!-- ── Contrôles carte sélectionnée ─────── -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/screen_margin"
+                android:layout_marginTop="24dp"
+                style="@style/Widget.Banking.Card">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/card_padding">
+
+                    <!-- Geler / Dégeler -->
+                    <include layout="@layout/item_card_control"
+                        android:id="@+id/control_freeze"/>
+
+                    <View android:layout_width="match_parent" android:layout_height="1dp"
+                        android:background="@color/divider" android:layout_marginVertical="4dp"/>
+
+                    <!-- Paiements en ligne -->
+                    <include layout="@layout/item_card_control"
+                        android:id="@+id/control_online"/>
+
+                    <View android:layout_width="match_parent" android:layout_height="1dp"
+                        android:background="@color/divider" android:layout_marginVertical="4dp"/>
+
+                    <!-- Paiements sans contact -->
+                    <include layout="@layout/item_card_control"
+                        android:id="@+id/control_contactless"/>
+
+                    <View android:layout_width="match_parent" android:layout_height="1dp"
+                        android:background="@color/divider" android:layout_marginVertical="4dp"/>
+
+                    <!-- Retraits DAB -->
+                    <include layout="@layout/item_card_control"
+                        android:id="@+id/control_atm"/>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- ── Détails carte ──────────────────────── -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/screen_margin"
+                android:layout_marginTop="16dp"
+                style="@style/Widget.Banking.Card">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/card_padding">
+
+                    <!-- Afficher le numéro -->
+                    <LinearLayout
+                        android:id="@+id/btn_show_card_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="52dp"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:background="?attr/selectableItemBackground">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_eye"
+                            app:tint="@color/text_secondary"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="14dp"
+                            android:text="@string/card_show_number"
+                            android:textColor="?attr/liqid_text_primary"
+                            android:textSize="15sp"/>
+
+                        <ImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:src="@drawable/ic_chevron_right"
+                            app:tint="@color/text_tertiary"/>
+
+                    </LinearLayout>
+
+                    <View android:layout_width="match_parent" android:layout_height="1dp"
+                        android:background="@color/divider"/>
+
+                    <!-- Limite de dépenses -->
+                    <LinearLayout
+                        android:id="@+id/btn_spending_limit"
+                        android:layout_width="match_parent"
+                        android:layout_height="52dp"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:background="?attr/selectableItemBackground">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_limit"
+                            app:tint="@color/text_secondary"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="14dp"
+                            android:text="Limite de dépenses"
+                            android:textColor="?attr/liqid_text_primary"
+                            android:textSize="15sp"/>
+
+                        <TextView
+                            android:id="@+id/tv_spending_limit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="?attr/liqid_text_secondary"
+                            android:textSize="14sp"
+                            android:layout_marginEnd="6dp"
+                            tools:text="10 000 €/mois"/>
+
+                        <ImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:src="@drawable/ic_chevron_right"
+                            app:tint="@color/text_tertiary"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- ── Bouton Ajouter carte ───────────────── -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_add_card"
+                style="@style/Widget.Banking.Button.Secondary"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/btn_height"
+                android:layout_marginHorizontal="@dimen/screen_margin"
+                android:layout_marginTop="24dp"
+                android:text="@string/card_add"
+                app:icon="@drawable/ic_add"
+                app:iconTint="@color/text_primary"
+                app:iconGravity="textStart"/>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <include layout="@layout/layout_custom_bottom_nav"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

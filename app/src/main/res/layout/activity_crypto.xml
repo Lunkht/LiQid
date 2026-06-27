@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    ÉCRAN CRYPTO — Portefeuille crypto style Revolut
+    Valeur totale + graphique + liste d'actifs
+-->
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/liqid_bg_primary">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/liqid_bg_primary"
+        app:elevation="0dp">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="@string/crypto_title"
+            app:titleTextColor="?attr/liqid_text_primary"/>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="72dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:overScrollMode="never">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="32dp">
+
+            <!-- ── Valeur totale portefeuille ─────────── -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:paddingHorizontal="@dimen/screen_margin"
+                android:paddingTop="24dp"
+                android:paddingBottom="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/crypto_portfolio"
+                    android:textColor="?attr/liqid_text_secondary"
+                    android:textSize="13sp"
+                    android:letterSpacing="0.06"
+                    android:textAllCaps="true"/>
+
+                <TextView
+                    android:id="@+id/tv_portfolio_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textColor="?attr/liqid_text_primary"
+                    android:textSize="38sp"
+                    android:fontFamily="sans-serif-light"
+                    android:letterSpacing="-0.02"
+                    tools:text="3 214,50 €"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="6dp">
+
+                    <ImageView
+                        android:id="@+id/iv_portfolio_trend"
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:src="@drawable/ic_arrow_up"
+                        app:tint="@color/success"/>
+
+                    <TextView
+                        android:id="@+id/tv_portfolio_change"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:textColor="@color/success"
+                        android:textSize="14sp"
+                        tools:text="+4,32% aujourd\'hui"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- ── Sélecteur période graphique ─────────── -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/screen_margin"
+                android:gravity="center">
+
+                <com.google.android.material.button.MaterialButtonToggleGroup
+                    android:id="@+id/toggle_period"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    app:singleSelection="true"
+                    app:selectionRequired="true">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_period_1d"
+                        style="@style/Widget.Material3.Button.TonalButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="1J"
+                        android:textSize="13sp"
+                        app:cornerRadius="10dp"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_period_1w"
+                        style="@style/Widget.Material3.Button.TonalButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="1S"
+                        android:textSize="13sp"
+                        app:cornerRadius="10dp"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_period_1m"
+                        style="@style/Widget.Material3.Button.TonalButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="1M"
+                        android:textSize="13sp"
+                        app:cornerRadius="10dp"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_period_1y"
+                        style="@style/Widget.Material3.Button.TonalButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="1A"
+                        android:textSize="13sp"
+                        app:cornerRadius="10dp"/>
+
+                </com.google.android.material.button.MaterialButtonToggleGroup>
+
+            </LinearLayout>
+
+            <!-- ── Zone graphique (MPAndroidChart) ─────── -->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:layout_marginTop="8dp">
+
+                <!-- Placeholder : remplacer par com.github.PhilJay:MPAndroidChart:LineChart -->
+                <View
+                    android:id="@+id/chart_portfolio"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="?attr/liqid_bg_primary"/>
+
+            </FrameLayout>
+
+            <!-- ── Actions Acheter / Vendre ─────────────── -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/screen_margin"
+                android:paddingVertical="16dp">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_buy_crypto"
+                    style="@style/Widget.Banking.Button.Primary"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/btn_height"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    android:text="@string/crypto_buy"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_sell_crypto"
+                    style="@style/Widget.Banking.Button.Secondary"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/btn_height"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/crypto_sell"/>
+
+            </LinearLayout>
+
+            <!-- ── Liste actifs crypto ───────────────────── -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/screen_margin"
+                android:paddingTop="8dp"
+                android:paddingBottom="12dp"
+                android:text="Mes actifs"
+                android:textColor="?attr/liqid_text_primary"
+                android:textSize="18sp"
+                android:fontFamily="sans-serif-medium"/>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/screen_margin"
+                style="@style/Widget.Banking.Card">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_crypto_assets"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"
+                    android:overScrollMode="never"
+                    tools:listitem="@layout/item_crypto_asset"
+                    tools:itemCount="4"/>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <include layout="@layout/layout_custom_bottom_nav"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

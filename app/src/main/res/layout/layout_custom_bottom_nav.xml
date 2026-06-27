@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/custom_bottom_nav"
+    android:layout_width="match_parent"
+    android:layout_height="72dp"
+    android:layout_gravity="bottom"
+    android:orientation="horizontal"
+    android:gravity="center"
+>
+
+    <LinearLayout
+        android:id="@+id/nav_home"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?attr/selectableItemBackgroundBorderless">
+
+        <ImageView
+            android:id="@+id/nav_icon_home"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/house_blank"/>
+
+        <TextView
+            android:id="@+id/nav_label_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/nav_home"
+            android:textSize="11sp"
+            android:fontFamily="sans-serif-medium"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/nav_cards"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?attr/selectableItemBackgroundBorderless">
+
+        <ImageView
+            android:id="@+id/nav_icon_cards"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/cards_blank"/>
+
+        <TextView
+            android:id="@+id/nav_label_cards"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/nav_cards"
+            android:textSize="11sp"
+            android:fontFamily="sans-serif-medium"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/nav_transfer"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?attr/selectableItemBackgroundBorderless">
+
+        <ImageView
+            android:id="@+id/nav_icon_transfer"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/transfer"/>
+
+        <TextView
+            android:id="@+id/nav_label_transfer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/nav_transfer"
+            android:textSize="11sp"
+            android:fontFamily="sans-serif-medium"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/nav_crypto"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?attr/selectableItemBackgroundBorderless">
+
+        <ImageView
+            android:id="@+id/nav_icon_crypto"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/monkey_bitcoin"/>
+
+        <TextView
+            android:id="@+id/nav_label_crypto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/nav_crypto"
+            android:textSize="11sp"
+            android:fontFamily="sans-serif-medium"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/nav_settings"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?attr/selectableItemBackgroundBorderless">
+
+        <ImageView
+            android:id="@+id/nav_icon_settings"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/settings"/>
+
+        <TextView
+            android:id="@+id/nav_label_settings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/nav_settings"
+            android:textSize="11sp"
+            android:fontFamily="sans-serif-medium"/>
+    </LinearLayout>
+
+</LinearLayout>

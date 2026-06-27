@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    BOTTOM SHEET — Échange de devises (style Revolut)
+    De [EUR] → Vers [USD] + taux + montant + confirmer
+-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/bg_bottom_sheet"
+    android:paddingBottom="40dp">
+
+    <!-- Handle -->
+    <View
+        android:layout_width="@dimen/sheet_handle_width"
+        android:layout_height="@dimen/sheet_handle_height"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/bg_sheet_handle"/>
+
+    <!-- Titre -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/screen_margin"
+        android:paddingTop="16dp"
+        android:paddingBottom="8dp"
+        android:text="Échanger des devises"
+        android:textColor="@color/text_primary"
+        android:textSize="20sp"
+        android:fontFamily="sans-serif-medium"/>
+
+    <!-- ── Bloc De / Vers ──────────────────────────── -->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/screen_margin"
+        android:layout_marginTop="8dp"
+        style="@style/Widget.Banking.Card">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/card_padding">
+
+            <!-- DE -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:text="De"
+                    android:textColor="@color/text_tertiary"
+                    android:textSize="13sp"/>
+
+                <!-- Sélecteur devise FROM -->
+                <LinearLayout
+                    android:id="@+id/btn_currency_from"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/bg_currency_selector"
+                    android:paddingHorizontal="12dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <TextView
+                        android:id="@+id/tv_flag_from"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🇪🇺"
+                        android:textSize="18sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_currency_from"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:text="EUR"
+                        android:textColor="@color/text_primary"
+                        android:textSize="15sp"
+                        android:fontFamily="sans-serif-medium"/>
+
+                    <ImageView
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:layout_marginStart="4dp"
+                        android:src="@drawable/ic_arrow_down"
+                        app:tint="@color/text_tertiary"/>
+
+                </LinearLayout>
+
+                <View android:layout_width="0dp" android:layout_height="1dp"
+                    android:layout_weight="1"/>
+
+                <!-- Montant FROM -->
+                <EditText
+                    android:id="@+id/et_amount_from"
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal"
+                    android:textColor="@color/text_primary"
+                    android:textSize="24sp"
+                    android:fontFamily="sans-serif-light"
+                    android:textAlignment="textEnd"
+                    android:background="@null"
+                    android:hint="0,00"
+                    android:textColorHint="@color/text_tertiary"
+                    tools:text="500,00"/>
+
+            </LinearLayout>
+
+            <!-- Solde disponible FROM -->
+            <TextView
+                android:id="@+id/tv_balance_from"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:textColor="@color/text_tertiary"
+                android:textSize="12sp"
+                tools:text="Disponible : 12 450,00 €"/>
+
+            <!-- Séparateur avec bouton swap -->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginVertical="4dp">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/divider"/>
+
+                <FrameLayout
+                    android:id="@+id/btn_swap"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/bg_swap_btn"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_exchange"
+                        app:tint="@color/accent_orange"/>
+
+                </FrameLayout>
+
+            </FrameLayout>
+
+            <!-- VERS -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:text="Vers"
+                    android:textColor="@color/text_tertiary"
+                    android:textSize="13sp"/>
+
+                <!-- Sélecteur devise TO -->
+                <LinearLayout
+                    android:id="@+id/btn_currency_to"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/bg_currency_selector"
+                    android:paddingHorizontal="12dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <TextView
+                        android:id="@+id/tv_flag_to"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🇺🇸"
+                        android:textSize="18sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_currency_to"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:text="USD"
+                        android:textColor="@color/text_primary"
+                        android:textSize="15sp"
+                        android:fontFamily="sans-serif-medium"/>
+
+                    <ImageView
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:layout_marginStart="4dp"
+                        android:src="@drawable/ic_arrow_down"
+                        app:tint="@color/text_tertiary"/>
+
+                </LinearLayout>
+
+                <View android:layout_width="0dp" android:layout_height="1dp"
+                    android:layout_weight="1"/>
+
+                <!-- Montant TO (calculé) -->
+                <TextView
+                    android:id="@+id/tv_amount_to"
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/success"
+                    android:textSize="24sp"
+                    android:fontFamily="sans-serif-light"
+                    android:textAlignment="textEnd"
+                    android:hint="0,00"
+                    android:textColorHint="@color/text_tertiary"
+                    tools:text="541,50"/>
+
+            </LinearLayout>
+
+            <!-- Solde disponible TO -->
+            <TextView
+                android:id="@+id/tv_balance_to"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:textColor="@color/text_tertiary"
+                android:textSize="12sp"
+                tools:text="Disponible : 124,80 $"/>
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- ── Taux de change ──────────────────────────── -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/screen_margin"
+        android:paddingTop="16dp"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:src="@drawable/ic_exchange"
+            app:tint="@color/text_tertiary"/>
+
+        <TextView
+            android:id="@+id/tv_exchange_rate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:textColor="@color/text_secondary"
+            android:textSize="13sp"
+            tools:text="1 EUR = 1,083 USD · Taux en temps réel"/>
+
+        <TextView
+            android:id="@+id/tv_rate_refresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Actualiser"
+            android:textColor="@color/accent_orange"
+            android:textSize="12sp"
+            android:clickable="true"
+            android:focusable="true"/>
+
+    </LinearLayout>
+
+    <!-- Frais d'échange -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/screen_margin"
+        android:paddingTop="8dp"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Frais"
+            android:textColor="@color/text_secondary"
+            android:textSize="13sp"/>
+
+        <TextView
+            android:id="@+id/tv_exchange_fee"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/success"
+            android:textSize="13sp"
+            android:fontFamily="sans-serif-medium"
+            tools:text="Gratuit (plan Standard)"/>
+
+    </LinearLayout>
+
+    <!-- ── Bouton Confirmer ────────────────────────── -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_confirm_exchange"
+        style="@style/Widget.Banking.Button.Primary"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/btn_height"
+        android:layout_marginHorizontal="@dimen/screen_margin"
+        android:layout_marginTop="24dp"
+        android:text="Confirmer l'échange"
+        app:icon="@drawable/ic_exchange"
+        app:iconTint="@color/text_on_accent"
+        app:iconGravity="textStart"/>
+
+</LinearLayout>

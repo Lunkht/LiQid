@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    DASHBOARD PRINCIPAL — Style Revolut
+    Structure :
+      CoordinatorLayout (edge-to-edge)
+      ├── AppBarLayout (invisible, pour le scroll behavior)
+      ├── NestedScrollView
+      │   └── LinearLayout vertical
+      │       ├── Header (salutation + avatar)
+      │       ├── Solde principal
+      │       ├── Actions rapides (Send / Receive / Exchange / Top-up)
+      │       ├── Carte bancaire (aperçu)
+      │       └── Liste transactions récentes
+      └── BottomNavigationView
+-->
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/liqid_bg_primary"
+    android:fitsSystemWindows="false">
+
+    <!-- ── Contenu principal scrollable ───────────────────── -->
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="72dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="30dp"
+                android:paddingBottom="24dp">
+
+                <!-- ── Header : Salutation + Avatar ────────── -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="@dimen/screen_margin"
+                    android:gravity="center_vertical">
+                    <!-- Avatar utilisateur -->
+                    <FrameLayout
+                        android:id="@+id/btn_avatar"
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        android:background="@drawable/bg_avatar"
+                        android:clickable="true"
+                        android:layout_marginEnd="9dp"
+                        android:focusable="true">
+
+                        <TextView
+                            android:id="@+id/tv_avatar_initials"
+                            android:layout_width="7dp"
+                            android:layout_height="16dp"
+                            android:layout_gravity="center"
+                            android:fontFamily="sans-serif-medium"
+                            android:text="L"
+                            android:textColor="@color/text_on_accent"
+                            android:textSize="16sp" />
+
+                    </FrameLayout>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_greeting"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Bonjour,"
+                            android:textColor="?attr/liqid_text_secondary"
+                            android:textSize="14sp"/>
+
+                        <TextView
+                            android:id="@+id/tv_username"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="Lunkht"
+                            android:textColor="?attr/liqid_text_primary"
+                            android:textSize="20sp"
+                            android:fontFamily="sans-serif-medium"/>
+
+                    </LinearLayout>
+
+                    <!-- Notification bell -->
+                    <FrameLayout
+                        android:id="@+id/btn_notifications"
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        android:layout_marginEnd="8dp"
+                        android:background="@drawable/bg_icon_button"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                        <ImageView
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_bell"
+                            app:tint="@color/text_secondary"/>
+
+                        <!-- Badge notification -->
+                        <View
+                            android:id="@+id/notification_badge"
+                            android:layout_width="8dp"
+                            android:layout_height="8dp"
+                            android:layout_gravity="top|end"
+                            android:layout_margin="8dp"
+                            android:background="@drawable/bg_notification_badge"
+                            android:visibility="gone"/>
+
+                    </FrameLayout>
+
+                </LinearLayout>
+
+                <!-- ── Solde principal ──────────────────────── -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="@dimen/screen_margin"
+                    android:paddingTop="32dp"
+                    android:paddingBottom="8dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_total_balance"
+                        android:textColor="?attr/liqid_text_secondary"
+                        android:textSize="13sp"
+                        android:letterSpacing="0.06"
+                        android:textAllCaps="true"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginTop="8dp">
+
+                        <TextView
+                            android:id="@+id/tv_balance"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="12 450,00 €"
+                            android:textColor="?attr/liqid_text_primary"
+                            android:textSize="42sp"
+                            android:fontFamily="sans-serif-light"
+                            android:letterSpacing="-0.02"
+                            tools:text="12 450,00 €"/>
+
+                        <TextView
+                            android:id="@+id/tv_hide_balance"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/label_hide_balance"
+                            android:textColor="?attr/liqid_text_secondary"
+                            android:textSize="13sp"
+                            android:paddingVertical="8dp"
+                            android:paddingHorizontal="12dp"
+                            android:background="@drawable/bg_pill_outline"
+                            android:clickable="true"
+                            android:focusable="true"/>
+
+                    </LinearLayout>
+
+                    <!-- Variation journalière -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginTop="6dp">
+
+                        <ImageView
+                            android:id="@+id/iv_trend_arrow"
+                            android:layout_width="14dp"
+                            android:layout_height="14dp"
+                            android:src="@drawable/ic_arrow_up"
+                            app:tint="?attr/liqid_success"/>
+
+                        <TextView
+                            android:id="@+id/tv_daily_change"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            android:text="+128,50 € aujourd\'hui"
+                            android:textColor="?attr/liqid_success"
+                            android:textSize="13sp"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!-- ── Actions rapides ──────────────────────── -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="@dimen/screen_margin"
+                    android:paddingVertical="24dp"
+                    android:gravity="center">
+
+                    <!-- Envoyer -->
+                    <include layout="@layout/item_quick_action"
+                        android:id="@+id/btn_send"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"/>
+
+                    <!-- Recevoir -->
+                    <include layout="@layout/item_quick_action"
+                        android:id="@+id/btn_receive"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"/>
+
+                    <!-- Échanger -->
+                    <include layout="@layout/item_quick_action"
+                        android:id="@+id/btn_exchange"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"/>
+
+                    <!-- Recharger -->
+                    <include layout="@layout/item_quick_action"
+                        android:id="@+id/btn_top_up"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"/>
+
+                </LinearLayout>
+
+                <!-- ── Aperçu carte bancaire (scrollable horizontal) ── -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="@dimen/screen_margin"
+                    android:text="Mes cartes"
+                    android:textColor="?attr/liqid_text_primary"
+                    android:textSize="18sp"
+                    android:fontFamily="sans-serif-medium"/>
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="none"
+                    android:layout_marginTop="16dp"
+                    android:paddingStart="@dimen/screen_margin"
+                    android:paddingEnd="@dimen/screen_margin"
+                    android:clipToPadding="false">
+
+                    <LinearLayout
+                        android:id="@+id/container_cards"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <!-- Les cartes sont ajoutées dynamiquement via le code -->
+
+                    </LinearLayout>
+
+                </HorizontalScrollView>
+
+                <!-- ── Section transactions récentes ───────── -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="@dimen/screen_margin"
+                    android:paddingTop="32dp"
+                    android:paddingBottom="16dp"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/section_recent"
+                        android:textColor="?attr/liqid_text_primary"
+                        android:textSize="18sp"
+                        android:fontFamily="sans-serif-medium"/>
+
+                    <TextView
+                        android:id="@+id/btn_see_all"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tout voir"
+                        android:textColor="?attr/liqid_accent"
+                        android:textSize="14sp"
+                        android:clickable="true"
+                        android:focusable="true"/>
+
+                </LinearLayout>
+
+                <!-- Card contenant la liste transactions -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/screen_margin"
+                    style="@style/Widget.Banking.Card">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_transactions"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:nestedScrollingEnabled="false"
+                        android:overScrollMode="never"
+                        tools:listitem="@layout/item_transaction"
+                        tools:itemCount="5"/>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- État vide transactions -->
+                <LinearLayout
+                    android:id="@+id/layout_empty_transactions"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/empty_transactions"
+                        android:textColor="?attr/liqid_text_secondary"
+                        android:textSize="16sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="@string/empty_transactions_sub"
+                        android:textColor="?attr/liqid_text_secondary"
+                        android:textSize="13sp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <!-- ── Overlay de chargement ────────────────────────── -->
+    <FrameLayout
+        android:id="@+id/loading_overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/liqid_bg_primary"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:indeterminateTint="?attr/liqid_accent"/>
+
+    </FrameLayout>
+
+    <!-- ── Message d'erreur ──────────────────────────────── -->
+    <TextView
+        android:id="@+id/tv_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="88dp"
+        android:background="@drawable/bg_error_toast"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="12dp"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        android:visibility="gone"/>
+
+    <!-- ── Bottom Navigation (custom) ──────────────────── -->
+    <include layout="@layout/layout_custom_bottom_nav"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

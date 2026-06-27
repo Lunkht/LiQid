@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    ÉCRAN DE VIREMENT — Style Revolut
+    Saisie IBAN + montant + motif + confirmation biométrique
+-->
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/liqid_bg_primary"
+    android:fitsSystemWindows="false">
+
+    <!-- Toolbar -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/liqid_bg_primary"
+        app:elevation="0dp">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:navigationIcon="@drawable/ic_arrow_back"
+            app:navigationIconTint="?attr/liqid_text_primary"
+            app:title="@string/transfer_title"
+            app:titleTextColor="?attr/liqid_text_primary"
+            app:titleTextAppearance="@style/TextAppearance.Banking.HeadlineMedium"/>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- Contenu scrollable -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="72dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/screen_margin"
+            android:paddingTop="24dp"
+            android:paddingBottom="32dp">
+
+            <!-- ── Sélecteur de contact récent ──────────── -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Contacts récents"
+                android:textColor="?attr/liqid_text_secondary"
+                android:textSize="13sp"
+                android:letterSpacing="0.05"
+                android:textAllCaps="true"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_recent_contacts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="28dp"
+                android:nestedScrollingEnabled="false"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_contact_avatar"
+                tools:itemCount="5"/>
+
+            <!-- ── Champ IBAN ─────────────────────────── -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_iban"
+                style="@style/Widget.Banking.TextInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_iban"
+                app:startIconDrawable="@drawable/ic_bank"
+            app:startIconTint="?attr/liqid_text_secondary"
+            app:endIconMode="clear_text"
+            app:endIconTint="?attr/liqid_text_secondary">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_iban"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:inputType="textCapCharacters"
+                android:textColor="?attr/liqid_text_primary"
+                android:textSize="15sp"
+                    android:fontFamily="monospace"
+                    android:letterSpacing="0.05"
+                    android:imeOptions="actionNext"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Preview destinataire (apparaît quand l'IBAN est reconnu) -->
+            <LinearLayout
+                android:id="@+id/layout_recipient_preview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="@drawable/bg_recipient_card"
+                android:padding="14dp"
+                android:layout_marginTop="8dp"
+                android:visibility="gone">
+
+                <FrameLayout
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/bg_avatar">
+
+                    <TextView
+                        android:id="@+id/tv_recipient_initials"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:textColor="@color/text_on_accent"
+                        android:textSize="15sp"
+                        android:fontFamily="sans-serif-medium"
+                        tools:text="AB"/>
+
+                </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginStart="12dp">
+
+                    <TextView
+                        android:id="@+id/tv_recipient_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="?attr/liqid_text_primary"
+                        android:textSize="15sp"
+                        android:fontFamily="sans-serif-medium"
+                        tools:text="Alpha Barry"/>
+
+                    <TextView
+                        android:id="@+id/tv_recipient_bank"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:textColor="?attr/liqid_text_secondary"
+                        android:textSize="12sp"
+                        tools:text="Banque de Guinée"/>
+
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/ic_check_circle"
+                    app:tint="@color/success"/>
+
+            </LinearLayout>
+
+            <!-- ── Champ Montant ──────────────────────── -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_amount"
+                style="@style/Widget.Banking.TextInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:hint="@string/hint_amount"
+                app:startIconDrawable="@drawable/ic_euro"
+                app:startIconTint="?attr/liqid_text_secondary"
+                app:suffixText="EUR"
+                app:suffixTextColor="?attr/liqid_text_secondary">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_amount"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:inputType="numberDecimal"
+                    android:textColor="?attr/liqid_text_primary"
+                    android:textSize="20sp"
+                    android:fontFamily="sans-serif-medium"
+                    android:imeOptions="actionNext"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Solde disponible -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp"
+                android:paddingHorizontal="4dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Solde disponible"
+                    android:textColor="?attr/liqid_text_secondary"
+                    android:textSize="12sp"/>
+
+                <TextView
+                    android:id="@+id/tv_available_balance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/accent_orange"
+                    android:textSize="12sp"
+                    android:fontFamily="sans-serif-medium"
+                    tools:text="12 450,00 €"/>
+
+            </LinearLayout>
+
+            <!-- Sélecteur devise rapide -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="4dp">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_currency_eur"
+                    style="@style/Widget.Material3.Button.TonalButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:text="EUR"
+                    android:textSize="13sp"
+                    android:backgroundTint="@color/accent_orange_20"
+                    android:textColor="?attr/liqid_accent"
+                    app:cornerRadius="10dp"
+                    android:layout_marginEnd="8dp"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_currency_usd"
+                    style="@style/Widget.Material3.Button.TonalButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:text="USD"
+                    android:textSize="13sp"
+                    android:backgroundTint="@color/bg_tertiary"
+                    android:textColor="@color/text_secondary"
+                    app:cornerRadius="10dp"
+                    android:layout_marginEnd="8dp"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_currency_gbp"
+                    style="@style/Widget.Material3.Button.TonalButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:text="GBP"
+                    android:textSize="13sp"
+                    android:backgroundTint="@color/bg_tertiary"
+                    android:textColor="@color/text_secondary"
+                    app:cornerRadius="10dp"/>
+
+            </LinearLayout>
+
+            <!-- ── Champ Motif ────────────────────────── -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_description"
+                style="@style/Widget.Banking.TextInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:hint="@string/hint_description"
+                app:startIconDrawable="@drawable/ic_note"
+            app:startIconTint="?attr/liqid_text_secondary"
+            app:counterEnabled="true"
+            app:counterMaxLength="140">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_description"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:inputType="text"
+                android:textColor="?attr/liqid_text_primary"
+                    android:textSize="15sp"
+                    android:maxLength="140"
+                    android:imeOptions="actionDone"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- ── Résumé frais ────────────────────────── -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                style="@style/Widget.Banking.Card">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                            android:layout_weight="1" android:text="Montant"
+                            android:textColor="@color/text_secondary" android:textSize="14sp"/>
+                        <TextView android:id="@+id/tv_summary_amount"
+                            android:layout_width="wrap_content" android:layout_height="wrap_content"
+                            android:textColor="@color/text_primary" android:textSize="14sp"
+                            tools:text="500,00 €"/>
+                    </LinearLayout>
+
+                    <View android:layout_width="match_parent" android:layout_height="1dp"
+                        android:background="@color/divider" android:layout_marginVertical="10dp"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                            android:layout_weight="1" android:text="Frais"
+                            android:textColor="@color/text_secondary" android:textSize="14sp"/>
+                        <TextView android:id="@+id/tv_summary_fee"
+                            android:layout_width="wrap_content" android:layout_height="wrap_content"
+                            android:textColor="@color/success" android:textSize="14sp"
+                            tools:text="Gratuit"/>
+                    </LinearLayout>
+
+                    <View android:layout_width="match_parent" android:layout_height="1dp"
+                        android:background="@color/divider" android:layout_marginVertical="10dp"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                            android:layout_weight="1" android:text="Total débité"
+                            android:textColor="@color/text_primary" android:textSize="15sp"
+                            android:fontFamily="sans-serif-medium"/>
+                        <TextView android:id="@+id/tv_summary_total"
+                            android:layout_width="wrap_content" android:layout_height="wrap_content"
+                            android:textColor="@color/text_primary" android:textSize="15sp"
+                            android:fontFamily="sans-serif-medium"
+                            tools:text="500,00 €"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Spacer -->
+            <View android:layout_width="match_parent" android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <!-- ── Bouton confirmer ───────────────────── -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_confirm_transfer"
+                style="@style/Widget.Banking.Button.Primary"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/btn_height"
+                android:layout_marginTop="24dp"
+                android:text="@string/btn_confirm_transfer"
+                app:icon="@drawable/ic_send"
+                app:iconTint="@color/text_on_accent"
+                app:iconGravity="textStart"/>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- Overlay chargement -->
+    <FrameLayout
+        android:id="@+id/loading_overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/scrim"
+        android:visibility="gone">
+
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            app:indicatorColor="?attr/liqid_accent"
+            app:trackColor="@color/bg_tertiary"/>
+
+    </FrameLayout>
+
+    <include layout="@layout/layout_custom_bottom_nav"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

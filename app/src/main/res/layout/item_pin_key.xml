@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- TOUCHE PIN — Chiffre + lettres optionnelles (style clavier iOS) -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_columnWeight="1"
+    android:layout_rowWeight="1"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="8dp"
+    android:clickable="true"
+    android:focusable="true">
+
+    <FrameLayout
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:background="@drawable/bg_pin_key">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/tv_key_digit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?attr/liqid_text_primary"
+                android:textSize="28sp"
+                android:fontFamily="sans-serif-light"
+                tools:text="1"/>
+
+            <TextView
+                android:id="@+id/tv_key_letters"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?attr/liqid_text_secondary"
+                android:textSize="9sp"
+                android:letterSpacing="0.1"
+                android:visibility="gone"
+                tools:text="ABC"/>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</LinearLayout>

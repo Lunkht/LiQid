@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Base Theme -->
+    <style name="Theme.Banking" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="colorPrimary">@color/accent_orange</item>
+        <item name="colorSurface">@color/bg_secondary</item>
+        <item name="android:windowBackground">@color/bg_primary</item>
+        <item name="android:statusBarColor">@color/bg_primary</item>
+        <item name="android:navigationBarColor">@color/bg_primary</item>
+
+        <item name="liqid_bg_primary">@color/bg_primary</item>
+        <item name="liqid_bg_secondary">@color/bg_secondary</item>
+        <item name="liqid_text_primary">@color/text_primary</item>
+        <item name="liqid_text_secondary">@color/text_secondary</item>
+        <item name="liqid_accent">@color/accent_orange</item>
+        <item name="liqid_border">@color/border</item>
+        <item name="liqid_card_bg">@drawable/bg_card_default</item>
+        <item name="liqid_success">@color/success</item>
+        <item name="liqid_error">@color/error</item>
+    </style>
+
+    <!-- Light Theme -->
+    <style name="Theme.Banking.Light" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">@color/accent_orange</item>
+        <item name="colorSurface">@color/light_bg_secondary</item>
+        <item name="android:windowBackground">@color/light_bg_primary</item>
+        <item name="android:statusBarColor">@color/light_bg_primary</item>
+        <item name="android:navigationBarColor">@color/light_bg_primary</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar">true</item>
+
+        <item name="liqid_bg_primary">@color/light_bg_primary</item>
+        <item name="liqid_bg_secondary">@color/light_bg_secondary</item>
+        <item name="liqid_text_primary">@color/light_text_primary</item>
+        <item name="liqid_text_secondary">@color/light_text_secondary</item>
+        <item name="liqid_accent">@color/accent_orange</item>
+        <item name="liqid_border">@color/light_border</item>
+        <item name="liqid_card_bg">@drawable/bg_card_light</item>
+        <item name="liqid_success">@color/success</item>
+        <item name="liqid_error">@color/error</item>
+    </style>
+
+    <!-- Neon Theme -->
+    <style name="Theme.Banking.Neon" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="colorPrimary">@color/neon_violet</item>
+        <item name="colorSurface">@color/neon_bg_secondary</item>
+        <item name="android:windowBackground">@color/neon_bg_primary</item>
+        <item name="android:statusBarColor">@color/neon_bg_primary</item>
+        <item name="android:navigationBarColor">@color/neon_bg_primary</item>
+
+        <item name="liqid_bg_primary">@color/neon_bg_primary</item>
+        <item name="liqid_bg_secondary">@color/neon_bg_secondary</item>
+        <item name="liqid_text_primary">#FFFFFF</item>
+        <item name="liqid_text_secondary">@color/neon_violet</item>
+        <item name="liqid_accent">@color/neon_violet</item>
+        <item name="liqid_border">@color/neon_violet</item>
+        <item name="liqid_card_bg">@drawable/bg_card_neon</item>
+        <item name="liqid_success">#FFFFFF</item> <!-- No orange in Neon -->
+        <item name="liqid_error">#FF0055</item>   <!-- Neon Pink -->
+    </style>
+
+    <!-- UI Widgets -->
+    <style name="Widget.Banking.Button.Primary" parent="Widget.Material3.Button">
+        <item name="android:backgroundTint">?attr/liqid_accent</item>
+        <item name="android:textColor">@color/text_on_accent</item>
+        <item name="cornerRadius">14dp</item>
+        <item name="android:minHeight">56dp</item>
+    </style>
+
+    <style name="Widget.Banking.Button.Secondary" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="android:textColor">?attr/liqid_text_primary</item>
+        <item name="strokeColor">?attr/liqid_border</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="cornerRadius">14dp</item>
+        <item name="android:minHeight">56dp</item>
+    </style>
+
+    <style name="Widget.Banking.Card" parent="Widget.Material3.CardView.Elevated">
+        <item name="android:background">?attr/liqid_card_bg</item>
+        <item name="cardBackgroundColor">@android:color/transparent</item>
+        <item name="cardElevation">0dp</item>
+        <item name="cardCornerRadius">20dp</item>
+        <item name="strokeWidth">0dp</item>
+    </style>
+
+    <style name="Widget.Banking.TextInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxBackgroundColor">?attr/liqid_bg_secondary</item>
+        <item name="boxStrokeColor">?attr/liqid_border</item>
+        <item name="boxStrokeWidth">1dp</item>
+        <item name="boxCornerRadiusTopStart">12dp</item>
+        <item name="boxCornerRadiusTopEnd">12dp</item>
+        <item name="boxCornerRadiusBottomStart">12dp</item>
+        <item name="boxCornerRadiusBottomEnd">12dp</item>
+        <item name="hintTextColor">?attr/liqid_text_secondary</item>
+        <item name="android:textColorHint">?attr/liqid_text_secondary</item>
+    </style>
+
+    <style name="TextAppearance.Banking.HeadlineMedium" parent="TextAppearance.Material3.HeadlineMedium">
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:letterSpacing">-0.01</item>
+        <item name="android:textColor">?attr/liqid_text_primary</item>
+    </style>
+
+    <style name="OtpBox">
+        <item name="android:layout_width">44dp</item>
+        <item name="android:layout_height">56dp</item>
+        <item name="android:layout_margin">4dp</item>
+        <item name="android:background">@drawable/bg_otp_box</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">?attr/liqid_text_primary</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+</resources>

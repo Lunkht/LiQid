@@ -1,0 +1,91 @@
+plugins {
+    alias(libs.plugins.android.application)
+}
+
+android {
+    namespace 'com.vulsoftinc.liqid'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.vulsoftinc.liqid"
+        minSdk 28
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", "API_BASE_URL", "\"https://api.liqid.vulsoftinc.com/api/\""
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    buildFeatures {
+        buildConfig = true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+def room_version = "2.6.1"
+def lifecycle_version = "2.6.2"
+def retrofit_version = "2.9.0"
+def okhttp_version = "4.12.0"
+
+configurations.all {
+    resolutionStrategy {
+        force "org.jetbrains.kotlin:kotlin-stdlib:1.9.0"
+        force "org.jetbrains.kotlin:kotlin-stdlib-common:1.9.0"
+    }
+}
+
+dependencies {
+
+    implementation libs.appcompat
+    implementation libs.material
+    implementation libs.activity
+    implementation libs.constraintlayout
+    testImplementation libs.junit
+    testImplementation "org.mockito:mockito-core:5.14.2"
+    testImplementation "org.mockito:mockito-inline:5.2.0"
+    testImplementation "com.squareup.okhttp3:mockwebserver:$okhttp_version"
+    androidTestImplementation libs.ext.junit
+    androidTestImplementation libs.espresso.core
+
+    // Kotlin stdlib (forced version for transitive dependencies)
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.9.0"
+
+    // Glide
+    implementation 'com.github.bumptech.glide:glide:4.16.0'
+
+    // Room
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+
+    // ViewModel and LiveData
+    implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-livedata:$lifecycle_version"
+
+    // Retrofit + OkHttp
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
+
+    // Gson
+    implementation 'com.google.code.gson:gson:2.10.1'
+
+    // SwipeRefreshLayout
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+
+    // Biometric
+    implementation 'androidx.biometric:biometric:1.2.0-alpha05'
+
+}

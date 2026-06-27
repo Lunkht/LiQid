@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    CONFIGURATION SÉCURITÉ RÉSEAU
+    - Bloque tout trafic HTTP clair
+    - SSL Pinning sur l'API Vulsoftinc Banking
+    - Autorise les certificats debug uniquement en mode debug
+-->
+<network-security-config>
+
+    <!-- Politique par défaut : HTTPS uniquement -->
+    <base-config cleartextTrafficPermitted="false">
+        <trust-anchors>
+            <certificates src="system"/>
+        </trust-anchors>
+    </base-config>
+
+    <!-- Pinning certificat sur l'API bancaire -->
+    <domain-config cleartextTrafficPermitted="false">
+        <domain includeSubdomains="true">api.liqid.vulsoftinc.com</domain>
+        <pin-set expiration="2027-01-01">
+            <pin digest="SHA-256">AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</pin>
+            <pin digest="SHA-256">BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB=</pin>
+        </pin-set>
+        <trust-anchors>
+            <certificates src="system"/>
+        </trust-anchors>
+    </domain-config>
+
+    <!-- En mode debug : autorise les certificats utilisateur (Charles Proxy, etc.) -->
+    <debug-overrides>
+        <trust-anchors>
+            <certificates src="system"/>
+            <certificates src="user"/>
+        </trust-anchors>
+    </debug-overrides>
+
+</network-security-config>

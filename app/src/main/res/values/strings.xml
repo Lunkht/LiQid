@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Liqid</string>
+
+    <!-- Navigation -->
+    <string name="nav_home">Accueil</string>
+    <string name="nav_cards">Cartes</string>
+    <string name="nav_crypto">Crypto</string>
+    <string name="nav_transfer">Virement</string>
+    <string name="nav_settings">Paramètres</string>
+
+    <!-- Dashboard -->
+    <string name="label_total_balance">Solde total</string>
+    <string name="label_hide_balance">Masquer</string>
+    <string name="label_show_balance">Afficher</string>
+
+    <!-- Actions rapides -->
+    <string name="action_send">Envoyer</string>
+    <string name="action_receive">Recevoir</string>
+    <string name="action_exchange">Échanger</string>
+    <string name="action_top_up">Recharger</string>
+    <string name="action_freeze">Geler</string>
+    <string name="action_unfreeze">Dégeler</string>
+
+    <!-- Transactions -->
+    <string name="section_recent">Récentes</string>
+    <string name="label_pending">En cours</string>
+    <string name="label_completed">Terminé</string>
+    <string name="label_failed">Échoué</string>
+    <string name="empty_transactions">Aucune transaction</string>
+    <string name="empty_transactions_sub">Vos transactions apparaîtront ici</string>
+
+    <!-- Virement -->
+    <string name="transfer_title">Envoyer de l\'argent</string>
+    <string name="hint_iban">IBAN du destinataire</string>
+    <string name="hint_amount">Montant</string>
+    <string name="hint_description">Motif (optionnel)</string>
+    <string name="btn_confirm_transfer">Confirmer le virement</string>
+    <string name="transfer_success">Virement envoyé !</string>
+
+    <!-- Cartes -->
+    <string name="cards_title">Mes cartes</string>
+    <string name="card_virtual">Carte virtuelle</string>
+    <string name="card_physical">Carte physique</string>
+    <string name="card_frozen">Carte gelée</string>
+    <string name="card_add">Ajouter une carte</string>
+    <string name="card_details">Détails de la carte</string>
+    <string name="card_show_number">Afficher le numéro</string>
+    <string name="card_copy_number">Copier</string>
+
+    <!-- Erreurs -->
+    <string name="error_network">Erreur réseau. Vérifiez votre connexion.</string>
+    <string name="error_insufficient_funds">Solde insuffisant</string>
+    <string name="error_invalid_iban">IBAN invalide</string>
+    <string name="error_invalid_amount">Montant invalide</string>
+    <string name="error_generic">Une erreur est survenue</string>
+
+    <!-- Biométrie -->
+    <string name="biometric_title">Confirmer avec biométrie</string>
+    <string name="biometric_subtitle">Utilisez votre empreinte ou Face ID</string>
+    <string name="biometric_cancel">Annuler</string>
+
+    <!-- Profil -->
+    <string name="profile_title">Mon profil</string>
+    <string name="profile_plan">Plan actuel</string>
+    <string name="profile_security">Sécurité</string>
+    <string name="profile_notifications">Notifications</string>
+    <string name="profile_logout">Déconnexion</string>
+
+    <!-- Crypto -->
+    <string name="crypto_title">Crypto</string>
+    <string name="crypto_portfolio">Mon portefeuille</string>
+    <string name="crypto_buy">Acheter</string>
+    <string name="crypto_sell">Vendre</string>
+
+</resources>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/liqid_bg_primary"
+    android:fitsSystemWindows="false">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/liqid_bg_primary"
+        app:elevation="0dp">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:navigationIcon="@drawable/ic_arrow_back"
+            app:navigationIconTint="?attr/liqid_text_primary"
+            app:title="Mes IBAN"
+            app:titleTextColor="?attr/liqid_text_primary"
+            app:titleTextAppearance="@style/TextAppearance.Banking.HeadlineMedium"/>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/screen_margin"
+        android:paddingTop="24dp"
+        android:gravity="top"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Compte Principal (EUR)"
+            android:textColor="?attr/liqid_text_primary"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/tv_iban"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="FR76 3000 6000 0123 4567 8901 234"
+            android:textColor="?attr/liqid_text_secondary"
+            android:textSize="14sp"
+            android:letterSpacing="0.05"
+            android:background="@drawable/bg_transaction_icon"
+            android:padding="16dp"
+            android:gravity="center"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_copy"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="24dp"
+            android:text="Copier l'IBAN"
+            android:textColor="@color/text_on_accent"
+            app:cornerRadius="12dp"
+            app:backgroundTint="?attr/liqid_accent"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="BIC"
+            android:textColor="?attr/liqid_text_primary"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/tv_bic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="LIQIDFR2P"
+            android:textColor="?attr/liqid_text_secondary"
+            android:textSize="14sp"
+            android:background="@drawable/bg_transaction_icon"
+            android:padding="16dp"
+            android:gravity="center"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_copy_bic"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="24dp"
+            android:text="Copier le BIC"
+            android:textColor="@color/text_on_accent"
+            app:cornerRadius="12dp"
+            app:backgroundTint="?attr/liqid_accent"/>
+
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

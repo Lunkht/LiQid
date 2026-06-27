@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    ÉCRAN AUTHENTIFICATION — Saisie PIN style Revolut
+    Logo + points PIN + clavier numérique + biométrie
+-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="?attr/liqid_bg_primary"
+    android:gravity="center_horizontal"
+    android:paddingBottom="40dp">
+
+    <!-- Logo -->
+    <ImageView
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="80dp"
+        android:src="@drawable/ic_logo"
+        app:tint="?attr/liqid_accent"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Liqid"
+        android:textColor="?attr/liqid_text_primary"
+        android:textSize="20sp"
+        android:fontFamily="sans-serif-medium"/>
+
+    <TextView
+        android:id="@+id/tv_auth_subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Entrez votre code PIN"
+        android:textColor="?attr/liqid_text_secondary"
+        android:textSize="15sp"/>
+
+    <!-- Points PIN -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="48dp">
+
+        <View android:id="@+id/pin_dot_1"
+            android:layout_width="14dp" android:layout_height="14dp"
+            android:layout_marginHorizontal="10dp"
+            android:background="@drawable/bg_pin_dot_empty"/>
+
+        <View android:id="@+id/pin_dot_2"
+            android:layout_width="14dp" android:layout_height="14dp"
+            android:layout_marginHorizontal="10dp"
+            android:background="@drawable/bg_pin_dot_empty"/>
+
+        <View android:id="@+id/pin_dot_3"
+            android:layout_width="14dp" android:layout_height="14dp"
+            android:layout_marginHorizontal="10dp"
+            android:background="@drawable/bg_pin_dot_empty"/>
+
+        <View android:id="@+id/pin_dot_4"
+            android:layout_width="14dp" android:layout_height="14dp"
+            android:layout_marginHorizontal="10dp"
+            android:background="@drawable/bg_pin_dot_empty"/>
+
+        <View android:id="@+id/pin_dot_5"
+            android:layout_width="14dp" android:layout_height="14dp"
+            android:layout_marginHorizontal="10dp"
+            android:background="@drawable/bg_pin_dot_empty"/>
+
+        <View android:id="@+id/pin_dot_6"
+            android:layout_width="14dp" android:layout_height="14dp"
+            android:layout_marginHorizontal="10dp"
+            android:background="@drawable/bg_pin_dot_empty"/>
+
+    </LinearLayout>
+
+    <!-- Spacer -->
+    <View android:layout_width="match_parent" android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <!-- Clavier numérique 3x4 -->
+    <GridLayout
+        android:id="@+id/keypad"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:columnCount="3"
+        android:rowCount="4"
+        android:layout_marginBottom="24dp">
+
+        <!-- Ligne 1 : 1 2 3 -->
+        <include layout="@layout/item_pin_key" android:id="@+id/key_1"/>
+        <include layout="@layout/item_pin_key" android:id="@+id/key_2"/>
+        <include layout="@layout/item_pin_key" android:id="@+id/key_3"/>
+
+        <!-- Ligne 2 : 4 5 6 -->
+        <include layout="@layout/item_pin_key" android:id="@+id/key_4"/>
+        <include layout="@layout/item_pin_key" android:id="@+id/key_5"/>
+        <include layout="@layout/item_pin_key" android:id="@+id/key_6"/>
+
+        <!-- Ligne 3 : 7 8 9 -->
+        <include layout="@layout/item_pin_key" android:id="@+id/key_7"/>
+        <include layout="@layout/item_pin_key" android:id="@+id/key_8"/>
+        <include layout="@layout/item_pin_key" android:id="@+id/key_9"/>
+
+        <!-- Ligne 4 : Biométrie | 0 | Effacer -->
+        <FrameLayout
+            android:id="@+id/key_biometric"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:padding="8dp"
+            android:clickable="true"
+            android:focusable="true">
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_fingerprint"
+                app:tint="@color/text_secondary"/>
+        </FrameLayout>
+
+        <include layout="@layout/item_pin_key" android:id="@+id/key_0"/>
+
+        <FrameLayout
+            android:id="@+id/key_delete"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:padding="8dp"
+            android:clickable="true"
+            android:focusable="true">
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_backspace"
+                app:tint="@color/text_secondary"/>
+        </FrameLayout>
+
+    </GridLayout>
+
+    <TextView
+        android:id="@+id/btn_switch_account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:text="Changer de compte"
+        android:textColor="?attr/liqid_accent"
+        android:textSize="14sp"
+        android:fontFamily="sans-serif-medium"
+        android:clickable="true"
+        android:focusable="true"/>
+
+</LinearLayout>

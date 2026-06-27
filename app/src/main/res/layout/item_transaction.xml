@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    ITEM TRANSACTION — RecyclerView
+    [Icône catégorie] [Nom marchand + description] [Montant + statut]
+-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/transaction_item_height"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="@dimen/card_padding"
+        android:paddingVertical="12dp">
+
+        <!-- Icône catégorie / logo marchand -->
+        <FrameLayout
+            android:layout_width="@dimen/transaction_icon_size"
+            android:layout_height="@dimen/transaction_icon_size"
+            android:background="@drawable/bg_transaction_icon">
+
+            <ImageView
+                android:id="@+id/iv_merchant_icon"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_card"
+                app:tint="@color/text_secondary"/>
+
+            <!-- Indicateur "en cours" — petit cercle orange en coin -->
+            <View
+                android:id="@+id/pending_indicator"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_gravity="bottom|end"
+                android:background="@drawable/bg_pending_dot"
+                android:visibility="gone"/>
+
+        </FrameLayout>
+
+        <!-- Nom + description -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginHorizontal="14dp">
+
+            <TextView
+                android:id="@+id/tv_merchant_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="?attr/liqid_text_primary"
+                android:textSize="15sp"
+                android:fontFamily="sans-serif-medium"
+                android:maxLines="1"
+                android:ellipsize="end"
+                tools:text="Netflix"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="3dp">
+
+                <!-- Badge "En cours" -->
+                <TextView
+                    android:id="@+id/tv_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_pending"
+                    android:textColor="@color/warning"
+                    android:textSize="11sp"
+                    android:fontFamily="sans-serif-medium"
+                    android:background="@drawable/bg_badge_warning"
+                    android:paddingHorizontal="6dp"
+                    android:paddingVertical="2dp"
+                    android:layout_marginEnd="6dp"
+                    android:visibility="gone"/>
+
+                <TextView
+                    android:id="@+id/tv_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="?attr/liqid_text_secondary"
+                    android:textSize="12sp"
+                    tools:text="24 juin · 14:32"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Montant -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="end">
+
+            <TextView
+                android:id="@+id/tv_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:fontFamily="sans-serif-medium"
+                android:textColor="@color/error"
+                tools:text="- 15,99 €"/>
+
+            <TextView
+                android:id="@+id/tv_original_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:textColor="@color/text_tertiary"
+                android:textSize="11sp"
+                android:visibility="gone"
+                tools:text="$17.40"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Séparateur (caché sur le dernier item via l'adapter) -->
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_height"
+        android:layout_marginStart="@dimen/divider_margin"
+        android:background="@color/divider"/>
+
+</LinearLayout>

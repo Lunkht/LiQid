@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    DÉTAIL TRANSACTION — Vue complète d'une transaction
+    Style Revolut : icône large centrée + infos + carte localisation
+-->
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/liqid_bg_primary">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/liqid_bg_primary"
+        app:elevation="0dp">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:navigationIcon="@drawable/ic_arrow_back"
+            app:navigationIconTint="?attr/liqid_text_primary"
+            app:title="Détail"
+            app:titleTextColor="?attr/liqid_text_primary"/>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:overScrollMode="never">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="40dp">
+
+            <!-- ── En-tête : icône + montant + marchand ── -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:paddingTop="16dp"
+                android:paddingBottom="32dp"
+                android:paddingHorizontal="@dimen/screen_margin">
+
+                <!-- Icône marchand grande -->
+                <FrameLayout
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:background="@drawable/bg_transaction_icon_large">
+
+                    <ImageView
+                        android:id="@+id/iv_detail_icon"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_card"
+                        app:tint="@color/text_secondary"/>
+
+                </FrameLayout>
+
+                <!-- Montant principal -->
+                <TextView
+                    android:id="@+id/tv_detail_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:textSize="40sp"
+                    android:fontFamily="sans-serif-light"
+                    android:letterSpacing="-0.02"
+                    android:textColor="@color/error"
+                    tools:text="- 15,99 €"/>
+
+                <!-- Montant original si change de devise -->
+                <TextView
+                    android:id="@+id/tv_detail_original_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textColor="?attr/liqid_text_secondary"
+                    android:textSize="14sp"
+                    android:visibility="gone"
+                    tools:text="$17.40 · Taux : 1.09"/>
+
+                <!-- Nom marchand -->
+                <TextView
+                    android:id="@+id/tv_detail_merchant"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:textColor="?attr/liqid_text_primary"
+                    android:textSize="22sp"
+                    android:fontFamily="sans-serif-medium"
+                    tools:text="Netflix"/>
+
+                <!-- Statut badge -->
+                <TextView
+                    android:id="@+id/tv_detail_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/label_completed"
+                    android:textColor="@color/success"
+                    android:textSize="13sp"
+                    android:background="@drawable/bg_badge_success"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="4dp"/>
+
+            </LinearLayout>
+
+            <!-- ── Détails ligne par ligne ─────────────── -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/screen_margin"
+                style="@style/Widget.Banking.Card">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/card_padding">
+
+                    <!-- Date & heure -->
+                    <include layout="@layout/item_detail_row" android:id="@+id/row_date"/>
+                    <View android:layout_width="match_parent" android:layout_height="1dp"
+                        android:background="@color/divider" android:layout_marginVertical="4dp"/>
+
+                    <!-- Catégorie -->
+                    <include layout="@layout/item_detail_row" android:id="@+id/row_category"/>
+                    <View android:layout_width="match_parent" android:layout_height="1dp"
+                        android:background="@color/divider" android:layout_marginVertical="4dp"/>
+
+                    <!-- Référence -->
+                    <include layout="@layout/item_detail_row" android:id="@+id/row_reference"/>
+                    <View android:layout_width="match_parent" android:layout_height="1dp"
+                        android:background="@color/divider" android:layout_marginVertical="4dp"/>
+
+                    <!-- Compte -->
+                    <include layout="@layout/item_detail_row" android:id="@+id/row_account"/>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- ── Localisation (si disponible) ─────────── -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/screen_margin"
+                android:layout_marginTop="16dp"
+                style="@style/Widget.Banking.Card"
+                android:visibility="gone">
+
+                <!-- Placeholder map — intégrer Google Maps ou OSM -->
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:background="@color/bg_tertiary">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_location"
+                        app:tint="@color/text_tertiary"/>
+
+                </FrameLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- ── Actions : Signaler / Exporter ─────────── -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/screen_margin"
+                android:paddingTop="24dp">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_report"
+                    style="@style/Widget.Material3.Button.TonalButton"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    android:text="Signaler"
+                    android:textColor="@color/error"
+                    android:backgroundTint="@color/error_10"
+                    app:cornerRadius="12dp"
+                    app:icon="@drawable/ic_flag"
+                    app:iconTint="@color/error"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_export_pdf"
+                    style="@style/Widget.Banking.Button.Secondary"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:text="Reçu PDF"
+                    app:icon="@drawable/ic_download"
+                    app:iconTint="@color/text_primary"
+                    app:cornerRadius="12dp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

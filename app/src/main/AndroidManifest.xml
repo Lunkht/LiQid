@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <uses-feature android:name="android.hardware.fingerprint" android:required="false" />
+
+    <application
+        android:name=".LiqidApp"
+        android:allowBackup="false"
+        android:icon="@drawable/ic_logo"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/ic_logo"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Banking"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:usesCleartextTraffic="false"
+        tools:targetApi="31">
+
+        <!-- Splash → point d'entrée -->
+        <activity android:name=".ui.splash.SplashActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Banking"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Onboarding -->
+        <activity android:name=".ui.onboarding.OnboardingActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
+        <!-- Connexion Email -->
+        <activity android:name=".ui.auth.LoginActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- Saisie Téléphone -->
+        <activity android:name=".ui.auth.PhoneEntryActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- Vérification OTP -->
+        <activity android:name=".ui.auth.OtpVerificationActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- Inscription -->
+        <activity android:name=".ui.auth.RegisterActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- Authentification PIN -->
+        <activity android:name=".ui.auth.AuthActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- Dashboard -->
+        <activity android:name=".ui.home.HomeActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
+        <!-- Cartes -->
+        <activity android:name=".ui.cards.CardsActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".ui.home.HomeActivity" />
+
+        <!-- Virement -->
+        <activity android:name=".ui.transfer.TransferActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"
+            android:parentActivityName=".ui.home.HomeActivity" />
+
+        <!-- Succès virement -->
+        <activity android:name=".ui.transfer.TransactionSuccessActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
+        <!-- Crypto -->
+        <activity android:name=".ui.crypto.CryptoActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".ui.home.HomeActivity" />
+
+        <!-- Profil -->
+        <activity android:name=".ui.profile.ProfileActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".ui.home.HomeActivity" />
+
+        <!-- Paramètres -->
+        <activity android:name=".ui.profile.SettingsActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
+        <!-- Infos personnelles -->
+        <activity android:name=".ui.profile.PersonalInfoActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
+        <!-- IBAN -->
+        <activity android:name=".ui.profile.IbanActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
+        <!-- Documents -->
+        <activity android:name=".ui.profile.DocumentsActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
+        <!-- Détail transaction -->
+        <activity android:name=".ui.home.TransactionDetailActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".ui.home.HomeActivity" />
+
+    </application>
+</manifest>

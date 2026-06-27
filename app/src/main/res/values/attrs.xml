@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="liqid_bg_primary" format="color" />
+    <attr name="liqid_bg_secondary" format="color" />
+    <attr name="liqid_text_primary" format="color" />
+    <attr name="liqid_text_secondary" format="color" />
+    <attr name="liqid_accent" format="color" />
+    <attr name="liqid_border" format="color" />
+    <attr name="liqid_card_bg" format="color|reference" />
+    <attr name="liqid_success" format="color" />
+    <attr name="liqid_error" format="color" />
+</resources>

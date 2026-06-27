@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="52dp"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:clickable="true"
+    android:focusable="true"
+    android:background="?attr/selectableItemBackground">
+
+    <FrameLayout
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:background="@drawable/bg_transaction_icon">
+        <ImageView
+            android:id="@+id/iv_menu_icon"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_gravity="center"
+            app:tint="@color/text_secondary"
+            tools:src="@drawable/ic_profile"/>
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_marginHorizontal="14dp">
+
+        <TextView
+            android:id="@+id/tv_menu_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="?attr/liqid_text_primary"
+            android:textSize="13sp"
+            tools:text="Informations personnelles"/>
+
+        <TextView
+            android:id="@+id/tv_menu_sublabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:textColor="?attr/liqid_text_secondary"
+            android:textSize="12sp"
+            android:visibility="gone"
+            tools:text="Vérifié"/>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_menu_chevron"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:src="@drawable/ic_chevron_right"
+        app:tint="@color/text_tertiary"
+        android:visibility="visible"/>
+
+    <com.google.android.material.materialswitch.MaterialSwitch
+        android:id="@+id/switch_menu_toggle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:clickable="false"
+        android:focusable="false"
+        app:trackTint="@drawable/selector_switch_track"
+        app:thumbTint="@color/text_primary"/>
+
+</LinearLayout>

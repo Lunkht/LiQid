@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/liqid_bg_primary"
+    android:fitsSystemWindows="false">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/liqid_bg_primary"
+        app:elevation="0dp">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:navigationIcon="@drawable/ic_arrow_back"
+            app:navigationIconTint="?attr/liqid_text_primary"
+            app:title="Documents"
+            app:titleTextColor="?attr/liqid_text_primary"
+            app:titleTextAppearance="@style/TextAppearance.Banking.HeadlineMedium"/>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/screen_margin"
+        android:paddingTop="24dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Relevés de compte"
+            android:textColor="?attr/liqid_text_primary"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+
+        <include layout="@layout/item_profile_menu"
+            android:id="@+id/menu_statement_current"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="12dp"/>
+
+        <include layout="@layout/item_profile_menu"
+            android:id="@+id/menu_statement_previous"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="4dp"/>
+
+        <include layout="@layout/item_profile_menu"
+            android:id="@+id/menu_statement_archive"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="4dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="Autres documents"
+            android:textColor="?attr/liqid_text_primary"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+
+        <include layout="@layout/item_profile_menu"
+            android:id="@+id/menu_terms"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="12dp"/>
+
+        <include layout="@layout/item_profile_menu"
+            android:id="@+id/menu_fee_schedule"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="4dp"/>
+
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

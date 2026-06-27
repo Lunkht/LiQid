@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    BOUTON ACTION RAPIDE — Send / Receive / Exchange / Top-up
+    Icône dans un cercle vert + label en dessous
+-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="8dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:background="?attr/selectableItemBackgroundBorderless">
+
+    <!-- Conteneur icône -->
+    <FrameLayout
+        android:layout_width="@dimen/quick_action_icon_container"
+        android:layout_height="@dimen/quick_action_icon_container"
+        android:background="@drawable/bg_quick_action">
+
+        <ImageView
+            android:id="@+id/iv_quick_action_icon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            app:tint="@color/text_on_accent"
+            tools:src="@drawable/ic_send"/>
+
+    </FrameLayout>
+
+    <!-- Label -->
+    <TextView
+        android:id="@+id/tv_quick_action_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textColor="?attr/liqid_text_secondary"
+        android:textSize="12sp"
+        android:fontFamily="sans-serif-medium"
+        tools:text="Envoyer"/>
+
+</LinearLayout>

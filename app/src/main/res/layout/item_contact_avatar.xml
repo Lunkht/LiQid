@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    CONTACT RÉCENT — Avatar circulaire + nom tronqué
+    Utilisé dans le RecyclerView horizontal de l'écran Transfert
+-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="72dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:paddingVertical="8dp"
+    android:layout_marginEnd="4dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:background="?attr/selectableItemBackgroundBorderless">
+
+    <!-- Avatar -->
+    <FrameLayout
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:background="@drawable/bg_avatar">
+
+        <TextView
+            android:id="@+id/tv_contact_initials"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@color/text_on_accent"
+            android:textSize="18sp"
+            android:fontFamily="sans-serif-medium"
+            tools:text="AB"/>
+
+    </FrameLayout>
+
+    <!-- Nom tronqué -->
+    <TextView
+        android:id="@+id/tv_contact_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:textColor="@color/text_secondary"
+        android:textSize="11sp"
+        android:gravity="center"
+        android:maxLines="1"
+        android:ellipsize="end"
+        tools:text="Alpha B."/>
+
+</LinearLayout>

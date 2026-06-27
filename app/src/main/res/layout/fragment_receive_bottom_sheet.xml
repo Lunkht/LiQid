@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    BOTTOM SHEET — Recevoir de l'argent
+    Affiche le QR Code + IBAN + bouton copier
+-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/bg_bottom_sheet"
+    android:paddingBottom="32dp">
+
+    <!-- Handle -->
+    <View
+        android:layout_width="@dimen/sheet_handle_width"
+        android:layout_height="@dimen/sheet_handle_height"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/bg_sheet_handle"/>
+
+    <!-- Titre -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/screen_margin"
+        android:text="Recevoir de l'argent"
+        android:textColor="@color/text_primary"
+        android:textSize="20sp"
+        android:fontFamily="sans-serif-medium"/>
+
+    <!-- QR Code -->
+    <FrameLayout
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/bg_qr_container"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/iv_qr_code"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitCenter"
+            tools:src="@drawable/ic_qr_placeholder"/>
+
+    </FrameLayout>
+
+    <!-- IBAN affiché -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:text="IBAN"
+        android:textColor="@color/text_secondary"
+        android:textSize="12sp"
+        android:letterSpacing="0.08"
+        android:textAllCaps="true"/>
+
+    <TextView
+        android:id="@+id/tv_iban_display"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="6dp"
+        android:textColor="@color/text_primary"
+        android:textSize="16sp"
+        android:fontFamily="monospace"
+        android:letterSpacing="0.08"
+        tools:text="GN00 VULB 0001 2345 6789 01"/>
+
+    <!-- Boutons actions -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/screen_margin"
+        android:paddingTop="24dp">
+
+        <!-- Copier IBAN -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_copy_iban"
+            style="@style/Widget.Banking.Button.Secondary"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/btn_height"
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"
+            android:text="Copier l'IBAN"
+            app:icon="@drawable/ic_copy"
+            app:iconTint="@color/text_primary"
+            app:iconGravity="textStart"/>
+
+        <!-- Partager -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_share_iban"
+            style="@style/Widget.Banking.Button.Primary"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/btn_height"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:text="Partager"
+            app:icon="@drawable/ic_share"
+            app:iconTint="@color/text_on_accent"
+            app:iconGravity="textStart"/>
+
+    </LinearLayout>
+
+</LinearLayout>

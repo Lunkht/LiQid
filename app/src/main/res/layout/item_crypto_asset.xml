@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    ITEM ACTIF CRYPTO — BTC, ETH, etc.
+    [Logo] [Nom + symbole] [Prix + variation] [Valeur possédée]
+-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="72dp"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:paddingHorizontal="@dimen/card_padding"
+    android:background="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true">
+
+    <!-- Logo crypto -->
+    <ImageView
+        android:id="@+id/iv_crypto_logo"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:src="@drawable/ic_bitcoin"
+        android:background="@drawable/bg_crypto_icon"/>
+
+    <!-- Nom + prix actuel -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_marginHorizontal="14dp">
+
+        <TextView
+            android:id="@+id/tv_crypto_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="?attr/liqid_text_primary"
+            android:textSize="15sp"
+            android:fontFamily="sans-serif-medium"
+            tools:text="Bitcoin"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="3dp">
+
+            <TextView
+                android:id="@+id/tv_crypto_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?attr/liqid_text_secondary"
+                android:textSize="12sp"
+                tools:text="42 150 €"/>
+
+            <View
+                android:layout_width="3dp"
+                android:layout_height="3dp"
+                android:layout_marginHorizontal="6dp"
+                android:background="@drawable/bg_dot"
+                android:alpha="0.4"/>
+
+            <TextView
+                android:id="@+id/tv_crypto_change"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/success"
+                android:textSize="12sp"
+                tools:text="+2,4%"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Valeur possédée + quantité -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="end">
+
+        <TextView
+            android:id="@+id/tv_crypto_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="?attr/liqid_text_primary"
+            android:textSize="15sp"
+            android:fontFamily="sans-serif-medium"
+            tools:text="1 250,00 €"/>
+
+        <TextView
+            android:id="@+id/tv_crypto_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:textColor="@color/text_secondary"
+            android:textSize="12sp"
+            tools:text="0.0297 BTC"/>
+
+    </LinearLayout>
+
+</LinearLayout>

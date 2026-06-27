@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    ITEM CARTE BANCAIRE — Adapté pour ViewPager2
+    La racine DOIT être match_parent pour éviter le crash ViewPager2
+-->
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="12dp"
+        android:layout_marginStart="12dp"
+        app:cardCornerRadius="@dimen/bank_card_radius"
+        app:cardElevation="@dimen/elevation_bank_card"
+        app:cardBackgroundColor="@color/card_dark_start"
+        android:clickable="true"
+        android:focusable="true">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!-- Fond dégradé simulé par deux rectangles superposés -->
+            <View
+                android:layout_width="180dp"
+                android:layout_height="180dp"
+                android:layout_gravity="top|end"
+                android:layout_marginTop="-60dp"
+                android:layout_marginEnd="-60dp"
+                android:background="@drawable/bg_card_circle_large"/>
+
+            <View
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_gravity="top|end"
+                android:layout_marginTop="-20dp"
+                android:layout_marginEnd="-20dp"
+                android:background="@drawable/bg_card_circle_small"/>
+
+            <!-- Contenu carte -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="22dp">
+
+                <!-- Ligne 1 : Logo bank + logo réseau -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Liqid"
+                        android:textColor="#CCFFFFFF"
+                        android:textSize="14sp"
+                        android:fontFamily="sans-serif-medium"
+                        android:letterSpacing="0.05"/>
+
+                    <TextView
+                        android:id="@+id/tv_card_plan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="STANDARD"
+                        android:textColor="#80FFFFFF"
+                        android:textSize="11sp"
+                        android:letterSpacing="0.08"
+                        android:fontFamily="sans-serif-medium"/>
+
+                </LinearLayout>
+
+                <!-- Puce NFC -->
+                <ImageView
+                    android:layout_width="36dp"
+                    android:layout_height="28dp"
+                    android:layout_marginTop="20dp"
+                    android:src="@drawable/ic_chip"
+                    app:tint="#B3FFFFFF"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+
+                <!-- Numéro de carte masqué -->
+                <TextView
+                    android:id="@+id/tv_card_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="•••• •••• •••• 4721"
+                    android:textColor="#E6FFFFFF"
+                    android:textSize="18sp"
+                    android:fontFamily="monospace"
+                    android:letterSpacing="0.12"/>
+
+                <!-- Ligne bas : Titulaire + Expiry + Logo réseau -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="16dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="TITULAIRE"
+                            android:textColor="#66FFFFFF"
+                            android:textSize="9sp"
+                            android:letterSpacing="0.1"/>
+
+                        <TextView
+                            android:id="@+id/tv_cardholder_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="LUNKHT"
+                            android:textColor="#E6FFFFFF"
+                            android:textSize="13sp"
+                            android:fontFamily="sans-serif-medium"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginEnd="16dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="EXPIRE"
+                            android:textColor="#66FFFFFF"
+                            android:textSize="9sp"
+                            android:letterSpacing="0.1"/>
+
+                        <TextView
+                            android:id="@+id/tv_card_expiry"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="09/28"
+                            android:textColor="#E6FFFFFF"
+                            android:textSize="13sp"
+                            android:fontFamily="monospace"/>
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/iv_card_scheme"
+                        android:layout_width="48dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_visa"
+                        android:scaleType="fitCenter"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- Overlay gelé -->
+            <View
+                android:id="@+id/overlay_frozen"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#CC0D0D0F"
+                android:visibility="gone"/>
+
+            <!-- Icône gelée -->
+            <LinearLayout
+                android:id="@+id/layout_frozen_indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/ic_freeze"
+                    app:tint="#99FFFFFF"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Carte gelée"
+                    android:textColor="#99FFFFFF"
+                    android:textSize="13sp"/>
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</FrameLayout>
