@@ -127,7 +127,7 @@
                 android:layout_marginStart="40dp"
                 android:textColor="@color/text_tertiary"
                 android:textSize="12sp"
-                tools:text="Disponible : 12 450,00 €"/>
+                tools:text="Disponible : 0,00 €"/>
 
             <!-- Séparateur avec bouton swap -->
             <FrameLayout

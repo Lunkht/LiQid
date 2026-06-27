@@ -2,7 +2,7 @@
 <!--
     CONFIGURATION SÉCURITÉ RÉSEAU
     - Bloque tout trafic HTTP clair
-    - SSL Pinning sur l'API Vulsoftinc Banking
+    - SSL Pinning sur l'API iBiliuminc Banking
     - Autorise les certificats debug uniquement en mode debug
 -->
 <network-security-config>
@@ -16,7 +16,7 @@
 
     <!-- Pinning certificat sur l'API bancaire -->
     <domain-config cleartextTrafficPermitted="false">
-        <domain includeSubdomains="true">api.liqid.vulsoftinc.com</domain>
+        <domain includeSubdomains="true">api.liqid.iBiliuminc.com</domain>
         <pin-set expiration="2027-01-01">
             <pin digest="SHA-256">AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</pin>
             <pin digest="SHA-256">BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB=</pin>

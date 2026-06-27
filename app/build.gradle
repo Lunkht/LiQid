@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace 'com.vulsoftinc.liqid'
+    namespace 'com.iBiliuminc.liqid'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.vulsoftinc.liqid"
+        applicationId "com.iBiliuminc.liqid"
         minSdk 28
         targetSdk 34
         versionCode 1
@@ -15,7 +15,7 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField "String", "API_BASE_URL", "\"https://api.liqid.vulsoftinc.com/api/\""
+        buildConfigField "String", "API_BASE_URL", "\"https://api.liqid.iBiliuminc.com/api/\""
     }
 
     buildTypes {

@@ -157,12 +157,12 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="12 450,00 €"
+                            android:text="00 €"
                             android:textColor="?attr/liqid_text_primary"
                             android:textSize="42sp"
                             android:fontFamily="sans-serif-light"
                             android:letterSpacing="-0.02"
-                            tools:text="12 450,00 €"/>
+                            tools:text="00 €"/>
 
                         <TextView
                             android:id="@+id/tv_hide_balance"
@@ -199,7 +199,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="4dp"
-                            android:text="+128,50 € aujourd\'hui"
+                            android:text="+00 € aujourd\'hui"
                             android:textColor="?attr/liqid_success"
                             android:textSize="13sp"/>
 

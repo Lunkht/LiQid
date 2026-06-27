@@ -100,12 +100,6 @@
                     android:src="@drawable/ic_arrow_down"
                     app:tint="@color/text_tertiary"/>
 
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="24dp"
-                    android:layout_marginStart="12dp"
-                    android:background="@color/divider"/>
-
             </LinearLayout>
 
             <!-- Champ numéro -->

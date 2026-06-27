@@ -81,22 +81,13 @@
                     <include layout="@layout/item_card_control"
                         android:id="@+id/control_freeze"/>
 
-                    <View android:layout_width="match_parent" android:layout_height="1dp"
-                        android:background="@color/divider" android:layout_marginVertical="4dp"/>
-
                     <!-- Paiements en ligne -->
                     <include layout="@layout/item_card_control"
                         android:id="@+id/control_online"/>
 
-                    <View android:layout_width="match_parent" android:layout_height="1dp"
-                        android:background="@color/divider" android:layout_marginVertical="4dp"/>
-
                     <!-- Paiements sans contact -->
                     <include layout="@layout/item_card_control"
                         android:id="@+id/control_contactless"/>
-
-                    <View android:layout_width="match_parent" android:layout_height="1dp"
-                        android:background="@color/divider" android:layout_marginVertical="4dp"/>
 
                     <!-- Retraits DAB -->
                     <include layout="@layout/item_card_control"
@@ -153,9 +144,6 @@
                             app:tint="@color/text_tertiary"/>
 
                     </LinearLayout>
-
-                    <View android:layout_width="match_parent" android:layout_height="1dp"
-                        android:background="@color/divider"/>
 
                     <!-- Limite de dépenses -->
                     <LinearLayout

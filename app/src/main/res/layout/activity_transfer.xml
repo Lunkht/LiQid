@@ -203,10 +203,10 @@
                     android:id="@+id/tv_available_balance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/accent_orange"
+                    android:textColor="?attr/liqid_accent"
                     android:textSize="12sp"
                     android:fontFamily="sans-serif-medium"
-                    tools:text="12 450,00 €"/>
+                    tools:text="0,00 €"/>
 
             </LinearLayout>
 
