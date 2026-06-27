@@ -7,7 +7,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.iBiliuminc.liqid.R;
@@ -43,9 +42,6 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Transaction tx = transactions.get(position);
         holder.bind(tx, listener);
-
-        boolean isLast = position == transactions.size() - 1;
-        holder.divider.setVisibility(isLast ? View.GONE : View.VISIBLE);
     }
 
     @Override
@@ -60,7 +56,6 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         final TextView tvAmount;
         final TextView tvStatus;
         final View pendingIndicator;
-        final View divider;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -70,7 +65,6 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
             tvAmount = itemView.findViewById(R.id.tv_amount);
             tvStatus = itemView.findViewById(R.id.tv_status);
             pendingIndicator = itemView.findViewById(R.id.pending_indicator);
-            divider = itemView.findViewById(R.id.divider);
         }
 
         void bind(Transaction tx, OnTransactionClickListener listener) {

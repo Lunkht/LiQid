@@ -60,6 +60,7 @@
                 app:tabGravity="center"
                 app:tabIndicatorHeight="0dp"
                 app:tabMinWidth="0dp"
+                app:tabBackground="@null"
                 app:tabPaddingStart="0dp"
                 app:tabPaddingEnd="0dp"/>
 
