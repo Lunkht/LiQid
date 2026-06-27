@@ -70,7 +70,7 @@ public class OtpVerificationActivity extends BaseActivity {
             public void onFinish() {
                 btnResend.setText("Renvoyer le code");
                 btnResend.setEnabled(true);
-                btnResend.setTextColor(getResources().getColor(R.color.accent_orange));
+                btnResend.setTextColor(com.iBiliuminc.liqid.util.ThemeUtils.resolveColor(OtpVerificationActivity.this, R.attr.liqid_accent));
             }
         }.start();
     }

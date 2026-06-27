@@ -149,7 +149,7 @@
                         android:layout_height="18dp"
                         android:layout_gravity="center"
                         android:src="@drawable/ic_exchange"
-                        app:tint="@color/accent_orange"/>
+                        app:tint="?attr/liqid_accent"/>
 
                 </FrameLayout>
 
@@ -269,7 +269,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Actualiser"
-            android:textColor="@color/accent_orange"
+            android:textColor="?attr/liqid_accent"
             android:textSize="12sp"
             android:clickable="true"
             android:focusable="true"/>

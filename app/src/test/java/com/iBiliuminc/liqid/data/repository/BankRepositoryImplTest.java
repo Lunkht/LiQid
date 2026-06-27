@@ -66,7 +66,7 @@ public class BankRepositoryImplTest {
         Account result = repository.getAccount();
 
         assertNotNull(result);
-        assertEquals(12450.0, result.getBalance(), 0.001);
+        assertEquals(0.0, result.getBalance(), 0.001);
     }
 
     @Test

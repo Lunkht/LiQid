@@ -12,7 +12,7 @@
     <uses-feature android:name="android.hardware.fingerprint" android:required="false" />
 
     <application
-        android:name=".LiqidApp"
+        android:name="com.iBiliuminc.liqid.LiqidApp"
         android:allowBackup="false"
         android:icon="@drawable/ic_logo"
         android:label="@string/app_name"
@@ -24,7 +24,7 @@
         tools:targetApi="31">
 
         <!-- Splash → point d'entrée -->
-        <activity android:name=".ui.splash.SplashActivity"
+        <activity android:name="com.iBiliuminc.liqid.ui.splash.SplashActivity"
             android:exported="true"
             android:theme="@style/Theme.Banking"
             android:screenOrientation="portrait">
@@ -35,100 +35,85 @@
         </activity>
 
         <!-- Onboarding -->
-        <activity android:name=".ui.onboarding.OnboardingActivity"
+        <activity android:name="com.iBiliuminc.liqid.ui.onboarding.OnboardingActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
 
         <!-- Connexion Email -->
-        <activity android:name=".ui.auth.LoginActivity"
+        <activity android:name="com.iBiliuminc.liqid.ui.auth.LoginActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
 
         <!-- Saisie Téléphone -->
-        <activity android:name=".ui.auth.PhoneEntryActivity"
+        <activity android:name="com.iBiliuminc.liqid.ui.auth.PhoneEntryActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
 
         <!-- Vérification OTP -->
-        <activity android:name=".ui.auth.OtpVerificationActivity"
+        <activity android:name="com.iBiliuminc.liqid.ui.auth.OtpVerificationActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
 
         <!-- Inscription -->
-        <activity android:name=".ui.auth.RegisterActivity"
+        <activity android:name="com.iBiliuminc.liqid.ui.auth.RegisterActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
 
         <!-- Authentification PIN -->
-        <activity android:name=".ui.auth.AuthActivity"
+        <activity android:name="com.iBiliuminc.liqid.ui.auth.AuthActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
 
         <!-- Dashboard -->
-        <activity android:name=".ui.home.HomeActivity"
+        <activity android:name="com.iBiliuminc.liqid.ui.home.HomeActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
 
         <!-- Cartes -->
-        <activity android:name=".ui.cards.CardsActivity"
+        <activity android:name="com.iBiliuminc.liqid.ui.cards.CardsActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:parentActivityName=".ui.home.HomeActivity" />
+            android:parentActivityName="com.iBiliuminc.liqid.ui.home.HomeActivity" />
 
         <!-- Virement -->
-        <activity android:name=".ui.transfer.TransferActivity"
+        <activity android:name="com.iBiliuminc.liqid.ui.transfer.TransferActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize"
-            android:parentActivityName=".ui.home.HomeActivity" />
+            android:parentActivityName="com.iBiliuminc.liqid.ui.home.HomeActivity" />
 
         <!-- Succès virement -->
-        <activity android:name=".ui.transfer.TransactionSuccessActivity"
+        <activity android:name="com.iBiliuminc.liqid.ui.transfer.TransactionSuccessActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
 
         <!-- Crypto -->
-        <activity android:name=".ui.crypto.CryptoActivity"
+        <activity android:name="com.iBiliuminc.liqid.ui.crypto.CryptoActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:parentActivityName=".ui.home.HomeActivity" />
+            android:parentActivityName="com.iBiliuminc.liqid.ui.home.HomeActivity" />
 
         <!-- Profil -->
-        <activity android:name=".ui.profile.ProfileActivity"
+        <activity android:name="com.iBiliuminc.liqid.ui.profile.ProfileActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:parentActivityName=".ui.home.HomeActivity" />
+            android:parentActivityName="com.iBiliuminc.liqid.ui.home.HomeActivity" />
 
         <!-- Paramètres -->
-        <activity android:name=".ui.profile.SettingsActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-
-        <!-- Infos personnelles -->
-        <activity android:name=".ui.profile.PersonalInfoActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-
-        <!-- IBAN -->
-        <activity android:name=".ui.profile.IbanActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-
-        <!-- Documents -->
-        <activity android:name=".ui.profile.DocumentsActivity"
+        <activity android:name="com.iBiliuminc.liqid.ui.profile.SettingsActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
 
         <!-- Détail transaction -->
-        <activity android:name=".ui.home.TransactionDetailActivity"
+        <activity android:name="com.iBiliuminc.liqid.ui.home.TransactionDetailActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:parentActivityName=".ui.home.HomeActivity" />
+            android:parentActivityName="com.iBiliuminc.liqid.ui.home.HomeActivity" />
 
     </application>
 </manifest>

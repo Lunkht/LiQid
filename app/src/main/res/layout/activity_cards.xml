@@ -57,12 +57,16 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="16dp"
+                android:background="@android:color/transparent"
+                app:tabBackground="@android:color/transparent"
+                app:tabRippleColor="@android:color/transparent"
+                app:tabIndicatorColor="@android:color/transparent"
                 app:tabGravity="center"
                 app:tabIndicatorHeight="0dp"
                 app:tabMinWidth="0dp"
-                app:tabBackground="@null"
                 app:tabPaddingStart="0dp"
-                app:tabPaddingEnd="0dp"/>
+                app:tabPaddingEnd="0dp"
+                app:tabIndicatorFullWidth="false"/>
 
             <!-- ── Contrôles carte sélectionnée ─────── -->
             <com.google.android.material.card.MaterialCardView

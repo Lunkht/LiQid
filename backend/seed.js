@@ -19,7 +19,7 @@ function seed() {
   const insertCardDetail = db.prepare('INSERT INTO cards_detail (id, account_id, card_number, cardholder_name, expiry_month, expiry_year, type, status, scheme, contactless_enabled, online_payments_enabled, atm_enabled, spending_limit) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
 
   const transaction = db.transaction(() => {
-    insertAccount.run('acc_1', 12450.00, 'EUR', 128.50);
+    insertAccount.run('acc_1', 0.0, 'EUR', 0.0);
 
     insertUser.run('user_1', 'Lunkht', 'L', '+224 6X XX XX XX', 'Standard');
     insertAuthUser.run('user_1', 'Lunkht', 'lunkht@liqid.app', '+224 6X XX XX XX', bcrypt.hashSync('000000', 10));

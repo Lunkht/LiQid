@@ -58,7 +58,7 @@ public class BankRepositoryImpl implements BankRepository {
                 return AccountMapper.toDomain(response.body());
             }
         } catch (IOException ignored) {}
-        return new Account("acc_1", 12450.00, "EUR", 128.50);
+        return new Account("acc_1", 0.0, "EUR", 0.0);
     }
 
     @Override
