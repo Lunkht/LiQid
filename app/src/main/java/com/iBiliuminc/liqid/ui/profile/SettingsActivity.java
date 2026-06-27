@@ -16,6 +16,7 @@ import com.iBiliuminc.liqid.R;
 import com.iBiliuminc.liqid.ui.BaseActivity;
 import com.iBiliuminc.liqid.ui.BottomNavHelper;
 import com.iBiliuminc.liqid.ui.auth.RegisterActivity;
+import com.iBiliuminc.liqid.util.CurrencyHelper;
 
 public class SettingsActivity extends BaseActivity {
 
@@ -47,6 +48,21 @@ public class SettingsActivity extends BaseActivity {
                 startActivity(new Intent(this, IbanActivity.class)));
         setNavigationItem(R.id.menu_documents, R.drawable.ic_download, "Documents", v ->
                 startActivity(new Intent(this, DocumentsActivity.class)));
+        setNavigationItem(R.id.menu_currency, R.drawable.ic_star, "Devise du compte", v -> {
+            String current = prefs.getString("display_currency", "EUR");
+            String[] labels = CurrencyHelper.getLabels();
+            String[] codes = CurrencyHelper.getCodes();
+            new AlertDialog.Builder(this)
+                    .setTitle("Choisir la devise")
+                    .setSingleChoiceItems(labels, java.util.Arrays.asList(codes).indexOf(current),
+                            (dialog, which) -> {
+                                prefs.edit().putString("display_currency", codes[which]).apply();
+                                Toast.makeText(this, "Devise : " + codes[which], Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                            })
+                    .setNegativeButton("Annuler", null)
+                    .show();
+        });
         setNavigationItem(R.id.menu_pin, R.drawable.ic_eye, "Modifier le code PIN", v -> {
             Intent intent = new Intent(this, RegisterActivity.class);
             intent.putExtra("change_pin_only", true);

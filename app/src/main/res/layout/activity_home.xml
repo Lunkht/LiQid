@@ -165,6 +165,21 @@
                             tools:text="00 €"/>
 
                         <TextView
+                            android:id="@+id/btn_currency"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="EUR"
+                            android:textColor="?attr/liqid_text_secondary"
+                            android:textSize="13sp"
+                            android:paddingVertical="8dp"
+                            android:paddingHorizontal="12dp"
+                            android:layout_marginEnd="10dp"
+                            android:background="@drawable/bg_pill_outline"
+                            android:clickable="true"
+                            android:focusable="true"
+                            tools:text="EUR"/>
+
+                        <TextView
                             android:id="@+id/tv_hide_balance"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -199,9 +214,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="4dp"
-                            android:text="+00 € aujourd\'hui"
+                            android:text="+00,00 € aujourd\'hui"
                             android:textColor="?attr/liqid_success"
-                            android:textSize="13sp"/>
+                            android:textSize="13sp"
+                            tools:text="+00,00 € aujourd'hui"/>
 
                     </LinearLayout>
 

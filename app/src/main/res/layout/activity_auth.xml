@@ -15,26 +15,16 @@
 
     <!-- Logo -->
     <ImageView
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:layout_marginTop="80dp"
-        android:src="@drawable/ic_logo"
-        app:tint="?attr/liqid_accent"/>
-
-    <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="126dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Liqid"
-        android:textColor="?attr/liqid_text_primary"
-        android:textSize="20sp"
-        android:fontFamily="sans-serif-medium"/>
+        android:layout_marginTop="80dp"
+        android:src="@drawable/logo"
+        app:tint="?attr/liqid_accent"/>
 
     <TextView
         android:id="@+id/tv_auth_subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:text="Entrez votre code PIN"
         android:textColor="?attr/liqid_text_secondary"
         android:textSize="15sp"/>

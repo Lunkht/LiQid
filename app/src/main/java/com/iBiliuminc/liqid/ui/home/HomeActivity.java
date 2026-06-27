@@ -23,6 +23,7 @@ import com.iBiliuminc.liqid.ui.BaseActivity;
 import com.iBiliuminc.liqid.ui.BottomNavHelper;
 import com.iBiliuminc.liqid.ui.profile.ProfileActivity;
 import com.iBiliuminc.liqid.ui.transfer.TransferActivity;
+import com.iBiliuminc.liqid.util.CurrencyHelper;
 
 import java.util.List;
 
@@ -32,9 +33,12 @@ public class HomeActivity extends BaseActivity {
     private TransactionAdapter adapter;
     private SwipeRefreshLayout swipeRefresh;
     private TextView tvBalance;
+    private TextView tvCurrency;
+    private TextView tvDailyChange;
     private TextView tvError;
     private View loadingOverlay;
     private View emptyTransactions;
+    private String displayCurrency;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +55,8 @@ public class HomeActivity extends BaseActivity {
         viewModel = new ViewModelProvider(this, factory).get(HomeViewModel.class);
 
         tvBalance = findViewById(R.id.tv_balance);
+        tvCurrency = findViewById(R.id.btn_currency);
+        tvDailyChange = findViewById(R.id.tv_daily_change);
         RecyclerView rvTransactions = findViewById(R.id.rv_transactions);
         swipeRefresh = findViewById(R.id.swipe_refresh);
         tvError = findViewById(R.id.tv_error);
@@ -70,6 +76,12 @@ public class HomeActivity extends BaseActivity {
         setupQuickActions();
         setupSwipeRefresh();
         observeData();
+
+        android.content.SharedPreferences prefs = getSharedPreferences("liqid_prefs", MODE_PRIVATE);
+        displayCurrency = prefs.getString("display_currency", "EUR");
+        tvCurrency.setText(displayCurrency);
+        tvCurrency.setOnClickListener(v -> showCurrencyPicker());
+        updateBalanceDisplay();
     }
 
     private void setupBottomNav() {
@@ -80,11 +92,11 @@ public class HomeActivity extends BaseActivity {
         findViewById(R.id.btn_send).setOnClickListener(v ->
                 startActivity(new Intent(this, TransferActivity.class)));
         findViewById(R.id.btn_receive).setOnClickListener(v ->
-                Toast.makeText(this, "Recevoir de l'argent", Toast.LENGTH_SHORT).show());
+                new ReceiveBottomSheet().show(getSupportFragmentManager(), "receive"));
         findViewById(R.id.btn_exchange).setOnClickListener(v ->
-                Toast.makeText(this, "Échanger des devises", Toast.LENGTH_SHORT).show());
+                new ExchangeBottomSheet().show(getSupportFragmentManager(), "exchange"));
         findViewById(R.id.btn_top_up).setOnClickListener(v ->
-                Toast.makeText(this, "Recharger le compte", Toast.LENGTH_SHORT).show());
+                new TopUpBottomSheet().show(getSupportFragmentManager(), "topup"));
 
         setQuickAction(R.id.btn_send, R.drawable.ic_send, R.string.action_send);
         setQuickAction(R.id.btn_receive, R.drawable.ic_receive, R.string.action_receive);
@@ -114,15 +126,9 @@ public class HomeActivity extends BaseActivity {
         TextView tvUsername = findViewById(R.id.tv_username);
         if (tvUsername != null) tvUsername.setText(name);
 
-        boolean isBalanceHidden = prefs.getBoolean("hide_balance_enabled", false);
-
         viewModel.getAccount().observe(this, account -> {
             if (account != null) {
-                if (isBalanceHidden) {
-                    tvBalance.setText("•••• €");
-                } else {
-                    tvBalance.setText(String.format("%02d", (int)account.getBalance()) + " \u20AC");
-                }
+                updateBalanceDisplay();
             }
         });
 
@@ -146,5 +152,44 @@ public class HomeActivity extends BaseActivity {
         viewModel.getLoading().observe(this, loading -> {
             loadingOverlay.setVisibility(Boolean.TRUE.equals(loading) ? View.VISIBLE : View.GONE);
         });
+    }
+
+    private void updateBalanceDisplay() {
+        android.content.SharedPreferences prefs = getSharedPreferences("liqid_prefs", MODE_PRIVATE);
+        boolean isBalanceHidden = prefs.getBoolean("hide_balance_enabled", false);
+        String symbol = CurrencyHelper.symbolFor(displayCurrency);
+
+        if (isBalanceHidden) {
+            tvBalance.setText("\u2022\u2022\u2022\u2022 " + symbol);
+        } else {
+            Account acc = viewModel.getAccount().getValue();
+            if (acc != null) {
+                tvBalance.setText(String.format("%.2f", acc.getBalance()) + " " + symbol);
+                String sign = acc.getDailyChange() >= 0 ? "+" : "";
+                tvDailyChange.setText(String.format("%s%.2f %s aujourd'hui", sign, acc.getDailyChange(), symbol));
+                tvDailyChange.setTextColor(acc.getDailyChange() >= 0
+                        ? getColor(R.color.success)
+                        : getColor(R.color.error));
+            }
+        }
+    }
+
+    private void showCurrencyPicker() {
+        String[] labels = CurrencyHelper.getLabels();
+        String[] codes = CurrencyHelper.getCodes();
+
+        new androidx.appcompat.app.AlertDialog.Builder(this)
+                .setTitle("Choisir la devise")
+                .setSingleChoiceItems(labels, java.util.Arrays.asList(codes).indexOf(displayCurrency),
+                        (dialog, which) -> {
+                            displayCurrency = codes[which];
+                            getSharedPreferences("liqid_prefs", MODE_PRIVATE)
+                                    .edit().putString("display_currency", displayCurrency).apply();
+                            tvCurrency.setText(displayCurrency);
+                            updateBalanceDisplay();
+                            dialog.dismiss();
+                        })
+                .setNegativeButton("Annuler", null)
+                .show();
     }
 }

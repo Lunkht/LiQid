@@ -1,5 +1,6 @@
 package com.iBiliuminc.liqid.ui.cards;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import com.google.android.material.tabs.TabLayoutMediator;
 import com.iBiliuminc.liqid.R;
 import com.iBiliuminc.liqid.core.di.AppContainer;
 import com.iBiliuminc.liqid.domain.model.BankCard;
+import com.iBiliuminc.liqid.domain.repository.BankRepository;
 import com.iBiliuminc.liqid.ui.BaseActivity;
 import com.iBiliuminc.liqid.ui.BottomNavHelper;
 
@@ -32,6 +34,8 @@ public class CardsActivity extends BaseActivity {
     private CardPagerAdapter pagerAdapter;
     private ViewPager2 viewPager;
     private View loadingOverlay;
+    private ExecutorService executor;
+    private BankRepository repository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +43,8 @@ public class CardsActivity extends BaseActivity {
         setContentView(R.layout.activity_cards);
 
         AppContainer container = AppContainer.getInstance(this);
-        ExecutorService executor = container.getExecutorService();
+        executor = container.getExecutorService();
+        repository = container.getRepository();
 
         loadingOverlay = findViewById(R.id.loading_overlay);
         viewPager = findViewById(R.id.viewpager_cards);
@@ -79,17 +84,31 @@ public class CardsActivity extends BaseActivity {
         findViewById(R.id.toolbar).setOnClickListener(v -> finish());
         BottomNavHelper.setup(this, R.id.nav_cards);
 
-        findViewById(R.id.btn_add_card).setOnClickListener(v ->
-                Toast.makeText(this, "Service indisponible", Toast.LENGTH_SHORT).show());
+        findViewById(R.id.btn_add_card).setOnClickListener(v -> {
+            Intent intent = new Intent(this, AddCardActivity.class);
+            startActivity(intent);
+        });
 
         findViewById(R.id.btn_show_card_number).setOnClickListener(v -> {
             if (!cards.isEmpty()) {
-                Toast.makeText(this, "Numéro : " + cards.get(currentCardIndex).getCardNumber(), Toast.LENGTH_LONG).show();
+                BankCard card = cards.get(currentCardIndex);
+                new androidx.appcompat.app.AlertDialog.Builder(this)
+                        .setTitle("Détails de la carte")
+                        .setMessage("Numéro : " + card.getCardNumber() + "\n" +
+                                "Titulaire : " + card.getCardholderName() + "\n" +
+                                "Expiration : " + card.getExpiryDate() + "\n" +
+                                "CVV : •••")
+                        .setPositiveButton("Fermer", null)
+                        .show();
             }
         });
 
         findViewById(R.id.btn_spending_limit).setOnClickListener(v ->
-                Toast.makeText(this, "Limite mensuelle : 10 000 \u20AC", Toast.LENGTH_SHORT).show());
+                new androidx.appcompat.app.AlertDialog.Builder(this)
+                        .setTitle("Limite de dépenses")
+                        .setMessage("Limite mensuelle actuelle : 10 000 \u20AC\nContactez le service client pour la modifier.")
+                        .setPositiveButton("Fermer", null)
+                        .show());
     }
 
     private void updateControls(BankCard card) {
@@ -112,17 +131,33 @@ public class CardsActivity extends BaseActivity {
                 "Geler la carte", "Bloquer tous les paiements", (card, newState) -> {
                     card.setFrozen(newState);
                     pagerAdapter.notifyItemChanged(currentCardIndex);
-                    Toast.makeText(this, newState ? "Carte gelée" : "Carte dégelée", Toast.LENGTH_SHORT).show();
+                    persistCard(card);
                 });
 
         setControl(R.id.control_online, R.drawable.ic_card,
-                "Paiements en ligne", "Achats sur internet", (card, newState) -> card.setOnlineEnabled(newState));
+                "Paiements en ligne", "Achats sur internet", (card, newState) -> {
+                    card.setOnlineEnabled(newState);
+                    persistCard(card);
+                });
 
         setControl(R.id.control_contactless, R.drawable.ic_chip,
-                "Sans contact", "Paiements NFC", (card, newState) -> card.setContactlessEnabled(newState));
+                "Sans contact", "Paiements NFC", (card, newState) -> {
+                    card.setContactlessEnabled(newState);
+                    persistCard(card);
+                });
 
         setControl(R.id.control_atm, R.drawable.ic_atm,
-                "Retrait DAB", "Distributeurs automatiques", (card, newState) -> card.setAtmEnabled(newState));
+                "Retrait DAB", "Distributeurs automatiques", (card, newState) -> {
+                    card.setAtmEnabled(newState);
+                    persistCard(card);
+                });
+    }
+
+    private void persistCard(BankCard card) {
+        executor.execute(() -> {
+            repository.updateCard(card.getId(), card.isFrozen(),
+                    card.isOnlineEnabled(), card.isContactlessEnabled(), card.isAtmEnabled());
+        });
     }
 
     private void setControl(int controlId, int iconRes, String label, String sublabel, OnControlChangedListener listener) {

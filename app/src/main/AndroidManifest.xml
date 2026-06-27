@@ -109,11 +109,32 @@
             android:exported="false"
             android:screenOrientation="portrait" />
 
+        <!-- Infos personnelles -->
+        <activity android:name="com.iBiliuminc.liqid.ui.profile.PersonalInfoActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
+        <!-- IBAN -->
+        <activity android:name="com.iBiliuminc.liqid.ui.profile.IbanActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
+        <!-- Documents -->
+        <activity android:name="com.iBiliuminc.liqid.ui.profile.DocumentsActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
         <!-- Détail transaction -->
         <activity android:name="com.iBiliuminc.liqid.ui.home.TransactionDetailActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:parentActivityName="com.iBiliuminc.liqid.ui.home.HomeActivity" />
+
+        <!-- Ajouter une carte -->
+        <activity android:name="com.iBiliuminc.liqid.ui.cards.AddCardActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
 
     </application>
 </manifest>
