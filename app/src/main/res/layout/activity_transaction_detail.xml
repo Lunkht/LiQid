@@ -130,19 +130,10 @@
 
                     <!-- Date & heure -->
                     <include layout="@layout/item_detail_row" android:id="@+id/row_date"/>
-                    <View android:layout_width="match_parent" android:layout_height="1dp"
-                        android:background="@color/divider" android:layout_marginVertical="4dp"/>
-
                     <!-- Catégorie -->
                     <include layout="@layout/item_detail_row" android:id="@+id/row_category"/>
-                    <View android:layout_width="match_parent" android:layout_height="1dp"
-                        android:background="@color/divider" android:layout_marginVertical="4dp"/>
-
                     <!-- Référence -->
                     <include layout="@layout/item_detail_row" android:id="@+id/row_reference"/>
-                    <View android:layout_width="match_parent" android:layout_height="1dp"
-                        android:background="@color/divider" android:layout_marginVertical="4dp"/>
-
                     <!-- Compte -->
                     <include layout="@layout/item_detail_row" android:id="@+id/row_account"/>
 

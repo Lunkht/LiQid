@@ -3,6 +3,7 @@ const cors = require('cors');
 const { v4: uuidv4 } = require('uuid');
 const { getDb } = require('./db');
 const { router: authRouter, authMiddleware } = require('./auth');
+const { seed } = require('./seed');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -11,6 +12,7 @@ app.use(cors());
 app.use(express.json());
 
 getDb();
+seed();
 
 app.use('/api', authRouter);
 

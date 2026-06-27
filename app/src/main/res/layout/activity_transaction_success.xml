@@ -83,9 +83,6 @@
                     android:fontFamily="sans-serif-medium" tools:text="500,00 €"/>
             </LinearLayout>
 
-            <View android:layout_width="match_parent" android:layout_height="1dp"
-                android:background="@color/divider"/>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
@@ -100,9 +97,6 @@
                     tools:text="Alpha Barry"/>
             </LinearLayout>
 
-            <View android:layout_width="match_parent" android:layout_height="1dp"
-                android:background="@color/divider"/>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
@@ -116,9 +110,6 @@
                     android:textColor="@color/text_tertiary" android:textSize="13sp"
                     android:fontFamily="monospace" tools:text="VLB-2025-06-001"/>
             </LinearLayout>
-
-            <View android:layout_width="match_parent" android:layout_height="1dp"
-                android:background="@color/divider"/>
 
             <LinearLayout
                 android:layout_width="match_parent"

@@ -46,4 +46,9 @@ function seed() {
   console.log('Database seeded successfully.');
 }
 
-seed();
+module.exports = { seed };
+
+// Allow running directly: node seed.js
+if (require.main === module) {
+  seed();
+}
